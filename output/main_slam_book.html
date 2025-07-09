@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slam Book - Main Page</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Dancing+Script:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animated stars */
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite;
+      }
+
+      .star:nth-child(1) { width: 3px; height: 3px; top: 10%; left: 10%; animation-delay: 0s; }
+      .star:nth-child(2) { width: 2px; height: 2px; top: 20%; left: 80%; animation-delay: 0.5s; }
+      .star:nth-child(3) { width: 4px; height: 4px; top: 30%; left: 20%; animation-delay: 1s; }
+      .star:nth-child(4) { width: 2px; height: 2px; top: 40%; left: 90%; animation-delay: 1.5s; }
+      .star:nth-child(5) { width: 3px; height: 3px; top: 50%; left: 5%; animation-delay: 2s; }
+      .star:nth-child(6) { width: 2px; height: 2px; top: 60%; left: 85%; animation-delay: 2.5s; }
+      .star:nth-child(7) { width: 4px; height: 4px; top: 70%; left: 15%; animation-delay: 0.3s; }
+      .star:nth-child(8) { width: 3px; height: 3px; top: 80%; left: 75%; animation-delay: 0.8s; }
+      .star:nth-child(9) { width: 2px; height: 2px; top: 90%; left: 25%; animation-delay: 1.3s; }
+      .star:nth-child(10) { width: 3px; height: 3px; top: 15%; left: 60%; animation-delay: 1.8s; }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+      }
+
+      /* Floating particles */
+      .particle {
+        position: absolute;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .particle:nth-child(11) { width: 8px; height: 8px; top: 5%; left: 15%; animation-delay: 0s; }
+      .particle:nth-child(12) { width: 6px; height: 6px; top: 15%; left: 85%; animation-delay: 1s; }
+      .particle:nth-child(13) { width: 10px; height: 10px; top: 25%; left: 25%; animation-delay: 2s; }
+      .particle:nth-child(14) { width: 7px; height: 7px; top: 35%; left: 95%; animation-delay: 3s; }
+      .particle:nth-child(15) { width: 9px; height: 9px; top: 45%; left: 10%; animation-delay: 4s; }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+      }
+
+      /* Main container */
+      .main-container {
+        background: 
+          radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
+        backdrop-filter: blur(10px);
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .main-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        border-radius: inherit;
+        padding: 3px;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        z-index: -1;
+      }
+
+      /* Enhanced title */
+      .title-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 3s ease infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Cover image with oscillation */
+      .cover-image {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        padding: 6px;
+        border-radius: 20px;
+        animation: swing 4s ease-in-out infinite;
+      }
+
+      .cover-image:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes swing {
+        0%   { transform: rotate(-20deg); }
+        10%  { transform: rotate(-15deg); }
+        25%  { transform: rotate(0deg); }
+        50%  { transform: rotate(20deg); }
+        75%  { transform: rotate(0deg); }
+        90%  { transform: rotate(-15deg); }
+        100% { transform: rotate(-20deg); }
+      }
+
+      /* Person cards */
+      .person-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .person-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: rgba(102, 126, 234, 0.5);
+      }
+
+      /* Decorative elements */
+      .decorative-line {
+        background: linear-gradient(90deg, transparent, #667eea, transparent);
+        height: 2px;
+        border-radius: 1px;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #ff5252, #26a69a);
+      }
+    </style>
+  </head>
+  <body class="p-4 sm:p-6 md:p-8 lg:p-10 min-h-screen relative">
+    <!-- Animated background elements -->
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <div class="main-container p-6 sm:p-8 md:p-10 lg:p-12 max-w-6xl mx-auto rounded-3xl shadow-2xl">
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <div class="decorative-line mb-6"></div>
+        <h1 class="title-gradient text-6xl sm:text-7xl font-extrabold mb-4">
+          🎉 SLAM BOOK 🎉
+        </h1>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-2">
+          A Collection of Memories & Messages
+        </h2>
+        <p class="text-lg text-gray-600">
+          Click on any person's card to read their special messages
+        </p>
+        <div class="decorative-line mt-6"></div>
+      </div>
+
+      <!-- Cover Image Section -->
+      <div class="text-center mb-12">
+        <div class="cover-image inline-block">
+                     <img
+             src="mainPage.png"
+             alt="Slam Book Cover"
+             class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl shadow-2xl object-cover"
+           />
+        </div>
+      </div>
+
+      <!-- People Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+        <!-- Person 1 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_01_Deepashree.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_01_Deepashree.jpg"
+                alt="Deepashree's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Deepashree</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 2 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_02_Anand.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_02_Anand.jpg"
+                alt="Anand's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Anand</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 3 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_03_Divya.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_03_Divya.jpg"
+                alt="Divya's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Divya</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 4 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_04_Sandeep.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_04_Sandeep.jpg"
+                alt="Sandeep's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Sandeep</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 5 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_05_Arjun_Narayan.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_05_Arjun_Narayan.jpg"
+                alt="Arjun Narayan's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Arjun Narayan</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 6 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_06_Adithi_Anitha_and_Lohith.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_06_Adithi_Anitha_and_Lohith.jpg"
+                alt="Adithi, Anitha, and Lohith's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Adithi, Anitha, and Lohith</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 7 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_07_Shashank_Shastry.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_07_Shashank_Shastry.jpg"
+                alt="Shashank Shastry's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Shashank Shastry</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 8 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_08_Pannaga.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_08_Pannaga.jpg"
+                alt="Pannaga's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Pannaga</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 9 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_09_Keshav.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_09_Keshav.jpg"
+                alt="Keshav's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Keshav</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 10 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_10_Krupa_Ramachandran.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_10_Krupa_Ramachandran.jpg"
+                alt="Krupa Ramachandran's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Krupa Ramachandran</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 11 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_11_Pannaga_S_S.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_11_Pannaga_S_S.jpg"
+                alt="Pannaga S S's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Pannaga S S</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 12 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_12_Aravind_Chakravarthy.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_12_Aravind_Chakravarthy.jpg"
+                alt="Aravind Chakravarthy's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Aravind Chakravarthy</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 13 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_13_Santosh_Bharadwaj.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_13_Santosh_Bharadwaj.jpg"
+                alt="Santosh Bharadwaj's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Santosh Bharadwaj</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 14 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_14_Chaithra.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_14_Chaithra.jpg"
+                alt="Chaithra's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Chaithra</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 15 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_15_Shwetha.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_15_Shwetha.jpg"
+                alt="Shwetha's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Shwetha</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 16 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_16_Aadi.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_16_Aadi.jpg"
+                alt="Aadi's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Aadi</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+        <!-- Person 17 -->
+        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('slam_page_17_Sindhoor.html', '_blank')">
+          <div class="text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+              <img
+                src="photo_17_Sindhoor.jpg"
+                alt="Sindhoor's Photo"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Sindhoor</h3>
+            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              📖 Open Slam Book
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center">
+        <div class="decorative-line mb-4"></div>
+        <p class="text-gray-600 text-sm">
+          ✨ Generated on July 09, 2025 at 06:09 PM | 17 Entries ✨
+        </p>
+        <div class="decorative-line mt-4"></div>
+      </div>
+    </div>
+
+    <script>
+      // Add some interactive effects
+      document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.person-card');
+        cards.forEach(card => {
+          card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.05)';
+          });
+          card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
