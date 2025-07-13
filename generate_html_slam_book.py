@@ -210,48 +210,38 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
     # Process each question (columns 3-17 in CSV)
     question_count = 0
     
-    # Handle first question (special layout with photo)
-    if len(question_columns) > 0:
+    # Fill the first question (next to the photo)
+    first_question_div = soup.find('div', class_='flex-grow card-bg-blue p-6 rounded-3xl shadow-lg min-h-[280px] flex flex-col max-w-xl')
+    if first_question_div and len(question_columns) > 0:
         first_answer = person_data.get(question_columns[0], "")
         clean_first_answer = clean_text(first_answer)
-        
         if clean_first_answer is not None:
-            # Update first question textarea
-            first_question_container = soup.find('div', class_='flex-grow card-bg-blue p-8 rounded-3xl shadow-lg')
-            if first_question_container:
-                first_textarea = first_question_container.find('textarea')
-                if first_textarea:
-                    first_textarea.string = clean_first_answer
-                question_count += 1
+            textarea = first_question_div.find('textarea')
+            if textarea:
+                textarea.string = clean_first_answer
+            question_count += 1
         else:
-            # Remove only the first question container, keep the photo
-            first_question_container = soup.find('div', class_='flex-grow card-bg-blue p-8 rounded-3xl shadow-lg')
-            if first_question_container:
-                first_question_container.decompose()
-    
-    # Process remaining questions (2-15)
-    questions_container = soup.find('div', class_='grid grid-cols-1 md:grid-cols-2 gap-8 mb-8')
+            first_question_div.decompose()
+
+    # Fill the remaining questions (2-15) in the 2-column grid
+    questions_container = soup.select_one('div.grid.grid-cols-1.md\:grid-cols-2')
     if questions_container:
-        # Get all question divs in the grid
-        question_divs = questions_container.find_all('div', class_=lambda x: x and 'card-bg-' in x)
-        
-        # Process each question div (2-15)
+        question_divs = questions_container.select('div[class^="card-bg-"]')
         for i, question_div in enumerate(question_divs):
             question_number = i + 2  # Questions 2-15
             if question_number <= len(question_columns):
                 csv_column = question_columns[question_number - 1]
                 answer = person_data.get(csv_column, "")
                 clean_answer = clean_text(answer)
-                
                 if clean_answer is not None:
-                    # Keep this question and fill the answer
                     textarea = question_div.find('textarea')
                     if textarea:
                         textarea.string = clean_answer
                     question_count += 1
                 else:
-                    # Remove this question if no answer
                     question_div.decompose()
+    else:
+        print(f"    ❌ Could not find questions container")
     
     # Update page title
     title_tag = soup.find('title')
