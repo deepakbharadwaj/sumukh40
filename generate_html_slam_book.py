@@ -224,10 +224,10 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
                     first_textarea.string = clean_first_answer
                 question_count += 1
         else:
-            # Remove first question if no answer
+            # Remove only the first question container, keep the photo
             first_question_container = soup.find('div', class_='flex-grow card-bg-blue p-8 rounded-3xl shadow-lg')
             if first_question_container:
-                first_question_container.parent.decompose()
+                first_question_container.decompose()
     
     # Process remaining questions (2-15)
     questions_container = soup.find('div', class_='grid grid-cols-1 md:grid-cols-2 gap-8 mb-8')
