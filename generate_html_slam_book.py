@@ -183,10 +183,15 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
     with open(template_path, 'r', encoding='utf-8') as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
     
-    # Update the name in the template
-    name_span = soup.find('span', class_='text-purple-600')
+    # Update the name in the template - Updated selector to handle the new font-bold class
+    name_span = soup.find('span', class_='text-purple-600 font-bold')
     if name_span:
         name_span.string = name
+    else:
+        # Fallback to the old selector
+        name_span = soup.find('span', class_='text-purple-600')
+        if name_span:
+            name_span.string = name
     
     # Download and update photo
     photo_url = person_data.get('Add a selfie or an old photo with him', '')
@@ -210,8 +215,8 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
     # Process each question (columns 3-17 in CSV)
     question_count = 0
     
-    # Fill the first question (next to the photo)
-    first_question_div = soup.find('div', class_='flex-grow card-bg-blue p-6 rounded-3xl shadow-lg min-h-[280px] flex flex-col max-w-xl')
+    # Fill the first question (next to the photo) - Updated selector to remove max-w-xl
+    first_question_div = soup.find('div', class_='flex-grow card-bg-blue p-6 sm:p-8 rounded-3xl shadow-lg min-h-[280px] flex flex-col')
     if first_question_div and len(question_columns) > 0:
         first_answer = person_data.get(question_columns[0], "")
         clean_first_answer = clean_text(first_answer)
@@ -223,10 +228,10 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
         else:
             first_question_div.decompose()
 
-    # Fill the remaining questions (2-15) in the 2-column grid
-    questions_container = soup.select_one('div.grid.grid-cols-1.md\:grid-cols-2')
+    # Fill the remaining questions (2-15) in the 2-column grid - Updated selector to use lg:grid-cols-2
+    questions_container = soup.select_one('div.grid.grid-cols-1.lg\\:grid-cols-2')
     if questions_container:
-        question_divs = questions_container.select('div[class^="card-bg-"]')
+        question_divs = questions_container.select('div[class*="card-bg-"]')
         for i, question_div in enumerate(question_divs):
             question_number = i + 2  # Questions 2-15
             if question_number <= len(question_columns):
@@ -248,10 +253,15 @@ def create_html_slam_page(person_data, template_path, output_dir, page_num):
     if title_tag:
         title_tag.string = f"Slam Book - {name}"
     
-    # Update footer with generation info
-    footer_text = soup.find('p', class_='text-gray-600 text-sm')
+    # Update footer with generation info - Updated to use the new footer-text class
+    footer_text = soup.find('p', class_='footer-text')
     if footer_text:
         footer_text.string = f"✨ Generated on {datetime.now().strftime('%B %d, %Y at %I:%M %p')} | Page {page_num} ✨"
+    else:
+        # Fallback to the old selector
+        footer_text = soup.find('p', class_='text-gray-600 text-sm')
+        if footer_text:
+            footer_text.string = f"✨ Generated on {datetime.now().strftime('%B %d, %Y at %I:%M %p')} | Page {page_num} ✨"
     
     # Save the HTML file
     with open(html_filename, 'w', encoding='utf-8') as file:
@@ -301,13 +311,14 @@ def main():
             print(f"   • {os.path.basename(file)}")
         
         print(f"\n🎨 Features of the generated HTML pages:")
-        print("   • Beautiful animated design with stars and particles")
+        print("   • Beautiful elegant design with darker backgrounds")
+        print("   • Animated stickers and floating elements")
         print("   • Personalized with each person's name")
-        print("   • Real photos downloaded from Google Drive")
+        print("   • Real photos downloaded from Google Drive with oscillating frames")
         print("   • Shows ALL questions that were actually answered")
         print("   • Removes questions with no answers")
-        print("   • Responsive design for all devices")
-        print("   • Interactive elements and animations")
+        print("   • Enhanced mobile responsive design")
+        print("   • Interactive elements and sophisticated animations")
         print("   • Ready to open in any web browser")
             
     except FileNotFoundError:

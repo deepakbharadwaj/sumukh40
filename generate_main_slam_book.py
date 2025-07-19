@@ -47,7 +47,7 @@ def extract_name_from_photo_filename(filename):
 def create_main_slam_book_page(people_data, output_dir):
     """Create the main slam book page with cover and links"""
     
-    # Create the main HTML content
+    # Create the main HTML content with updated darker theme
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,215 +57,418 @@ def create_main_slam_book_page(people_data, output_dir):
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Dancing+Script:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       body {{
         font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, 
+          rgba(71, 85, 105, 1) 0%, 
+          rgba(55, 65, 81, 1) 25%, 
+          rgba(75, 85, 99, 1) 50%, 
+          rgba(55, 65, 81, 1) 75%, 
+          rgba(67, 56, 202, 1) 100%);
         min-height: 100vh;
         overflow-x: hidden;
+        position: relative;
       }}
 
-      /* Animated stars */
-      .star {{
+      /* Enhanced background pattern with darker theme */
+      body::before {{
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 25% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        background-size: 250px 250px, 200px 200px, 220px 220px, 280px 280px;
+        z-index: -2;
+        animation: patternMove 25s ease-in-out infinite;
+      }}
+
+      @keyframes patternMove {{
+        0%, 100% {{ background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%; }}
+        50% {{ background-position: 30% 30%, 70% 30%, 30% 70%, 70% 70%; }}
+      }}
+
+      /* Animated stickers */
+      .animated-sticker {{
         position: absolute;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 3s infinite;
+        font-size: 1.5rem;
+        animation: floatSticker 8s ease-in-out infinite;
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 1;
       }}
 
-      .star:nth-child(1) {{ width: 3px; height: 3px; top: 10%; left: 10%; animation-delay: 0s; }}
-      .star:nth-child(2) {{ width: 2px; height: 2px; top: 20%; left: 80%; animation-delay: 0.5s; }}
-      .star:nth-child(3) {{ width: 4px; height: 4px; top: 30%; left: 20%; animation-delay: 1s; }}
-      .star:nth-child(4) {{ width: 2px; height: 2px; top: 40%; left: 90%; animation-delay: 1.5s; }}
-      .star:nth-child(5) {{ width: 3px; height: 3px; top: 50%; left: 5%; animation-delay: 2s; }}
-      .star:nth-child(6) {{ width: 2px; height: 2px; top: 60%; left: 85%; animation-delay: 2.5s; }}
-      .star:nth-child(7) {{ width: 4px; height: 4px; top: 70%; left: 15%; animation-delay: 0.3s; }}
-      .star:nth-child(8) {{ width: 3px; height: 3px; top: 80%; left: 75%; animation-delay: 0.8s; }}
-      .star:nth-child(9) {{ width: 2px; height: 2px; top: 90%; left: 25%; animation-delay: 1.3s; }}
-      .star:nth-child(10) {{ width: 3px; height: 3px; top: 15%; left: 60%; animation-delay: 1.8s; }}
+      .sticker-1 {{ top: 8%; left: 5%; animation-delay: 0s; }}
+      .sticker-2 {{ top: 12%; right: 6%; animation-delay: 1s; }}
+      .sticker-3 {{ bottom: 25%; left: 4%; animation-delay: 2s; }}
+      .sticker-4 {{ bottom: 12%; right: 8%; animation-delay: 3s; }}
+      .sticker-5 {{ top: 40%; left: 2%; animation-delay: 1.5s; }}
+      .sticker-6 {{ top: 60%; right: 3%; animation-delay: 2.5s; }}
 
-      @keyframes twinkle {{
-        0%, 100% {{ opacity: 0.3; transform: scale(1); }}
-        50% {{ opacity: 1; transform: scale(1.2); }}
+      @keyframes floatSticker {{
+        0%, 100% {{ 
+          transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); 
+          opacity: 0.6; 
+        }}
+        25% {{ 
+          transform: translateY(-15px) translateX(8px) rotate(3deg) scale(1.05); 
+          opacity: 0.8; 
+        }}
+        50% {{ 
+          transform: translateY(-25px) translateX(-3px) rotate(-2deg) scale(0.95); 
+          opacity: 0.4; 
+        }}
+        75% {{ 
+          transform: translateY(-10px) translateX(-8px) rotate(1deg) scale(1.02); 
+          opacity: 0.7; 
+        }}
       }}
 
-      /* Floating particles */
-      .particle {{
+      /* Enhanced sparkles */
+      .sparkle {{
         position: absolute;
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        width: 5px;
+        height: 5px;
+        background: linear-gradient(45deg, #fbbf24, #f59e0b);
         border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
+        animation: sparkleShine 4s ease-in-out infinite;
+        opacity: 0.7;
+        z-index: 1;
       }}
 
-      .particle:nth-child(11) {{ width: 8px; height: 8px; top: 5%; left: 15%; animation-delay: 0s; }}
-      .particle:nth-child(12) {{ width: 6px; height: 6px; top: 15%; left: 85%; animation-delay: 1s; }}
-      .particle:nth-child(13) {{ width: 10px; height: 10px; top: 25%; left: 25%; animation-delay: 2s; }}
-      .particle:nth-child(14) {{ width: 7px; height: 7px; top: 35%; left: 95%; animation-delay: 3s; }}
-      .particle:nth-child(15) {{ width: 9px; height: 9px; top: 45%; left: 10%; animation-delay: 4s; }}
+      .sparkle:nth-child(7) {{ top: 15%; left: 20%; animation-delay: 0s; }}
+      .sparkle:nth-child(8) {{ top: 30%; right: 15%; animation-delay: 1s; }}
+      .sparkle:nth-child(9) {{ bottom: 40%; left: 22%; animation-delay: 2s; }}
+      .sparkle:nth-child(10) {{ bottom: 20%; right: 25%; animation-delay: 3s; }}
+      .sparkle:nth-child(11) {{ top: 50%; left: 10%; animation-delay: 1.5s; }}
 
-      @keyframes float {{
-        0%, 100% {{ transform: translateY(0px) rotate(0deg); }}
-        50% {{ transform: translateY(-20px) rotate(180deg); }}
+      @keyframes sparkleShine {{
+        0%, 100% {{ opacity: 0.4; transform: scale(1); }}
+        50% {{ opacity: 1; transform: scale(1.6); }}
       }}
 
-      /* Main container */
+      /* Main container with enhanced elegance */
       .main-container {{
-        background: 
-          radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
-          linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
-        backdrop-filter: blur(10px);
-        border: 3px solid transparent;
-        background-clip: padding-box;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.95) 0%, 
+          rgba(248, 250, 252, 0.93) 50%, 
+          rgba(241, 245, 249, 0.95) 100%);
+        backdrop-filter: blur(25px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+          0 25px 50px rgba(0, 0, 0, 0.15),
+          0 8px 32px rgba(139, 92, 246, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
         position: relative;
         overflow: hidden;
+        z-index: 10;
       }}
 
       .main-container::before {{
-        content: '';
+        content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, 
+          rgba(139, 92, 246, 0.3), 
+          rgba(236, 72, 153, 0.3), 
+          rgba(59, 130, 246, 0.3), 
+          rgba(16, 185, 129, 0.3));
         border-radius: inherit;
-        padding: 3px;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
         z-index: -1;
+        animation: borderGlow 5s ease-in-out infinite;
+      }}
+
+      @keyframes borderGlow {{
+        0%, 100% {{ opacity: 0.4; }}
+        50% {{ opacity: 0.7; }}
       }}
 
       /* Enhanced title */
       .title-gradient {{
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-        background-size: 400% 400%;
-        animation: gradientShift 3s ease infinite;
+        background: linear-gradient(135deg, 
+          #8b5cf6 0%, 
+          #ec4899 25%, 
+          #3b82f6 50%, 
+          #10b981 75%, 
+          #f59e0b 100%);
+        background-size: 300% 300%;
+        animation: elegantGradient 6s ease infinite;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        font-family: "Playfair Display", serif;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }}
 
-      @keyframes gradientShift {{
+      @keyframes elegantGradient {{
         0% {{ background-position: 0% 50%; }}
         50% {{ background-position: 100% 50%; }}
         100% {{ background-position: 0% 50%; }}
       }}
 
-      /* Cover image with oscillation */
+      /* Cover image with enhanced oscillation */
       .cover-image {{
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
-        padding: 6px;
-        border-radius: 20px;
-        animation: swing 4s ease-in-out infinite;
+        background: linear-gradient(45deg, 
+          rgba(139, 92, 246, 0.9), 
+          rgba(236, 72, 153, 0.9), 
+          rgba(59, 130, 246, 0.9), 
+          rgba(16, 185, 129, 0.9));
+        background-size: 400% 400%;
+        padding: 8px;
+        border-radius: 24px;
+        animation: coverSwingAndGlow 5s ease-in-out infinite;
+        box-shadow: 
+          0 0 50px rgba(139, 92, 246, 0.4),
+          0 16px 50px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }}
+
+      .cover-image::before {{
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        background: linear-gradient(45deg, 
+          rgba(255, 255, 255, 0.4), 
+          rgba(255, 255, 255, 0.1));
+        border-radius: 28px;
+        z-index: -1;
+        animation: coverShimmer 3s ease infinite;
+      }}
+
+      @keyframes coverSwingAndGlow {{
+        0% {{ 
+          background-position: 0% 50%; 
+          transform: rotate(-10deg); 
+        }}
+        25% {{ 
+          background-position: 50% 50%; 
+          transform: rotate(0deg); 
+        }}
+        50% {{ 
+          background-position: 100% 50%; 
+          transform: rotate(10deg); 
+        }}
+        75% {{ 
+          background-position: 50% 50%; 
+          transform: rotate(0deg); 
+        }}
+        100% {{ 
+          background-position: 0% 50%; 
+          transform: rotate(-10deg); 
+        }}
+      }}
+
+      @keyframes coverShimmer {{
+        0%, 100% {{ opacity: 0.3; }}
+        50% {{ opacity: 0.6; }}
       }}
 
       .cover-image:hover {{
         animation-play-state: paused;
+        transform: scale(1.05) rotate(0deg);
       }}
 
-      @keyframes swing {{
-        0%   {{ transform: rotate(-20deg); }}
-        10%  {{ transform: rotate(-15deg); }}
-        25%  {{ transform: rotate(0deg); }}
-        50%  {{ transform: rotate(20deg); }}
-        75%  {{ transform: rotate(0deg); }}
-        90%  {{ transform: rotate(-15deg); }}
-        100% {{ transform: rotate(-20deg); }}
-      }}
-
-      /* Person cards */
+      /* Enhanced person cards */
       .person-card {{
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 100%);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.95) 0%, 
+          rgba(248, 250, 252, 0.9) 100%);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }}
+
+      .person-card::before {{
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, 
+          transparent, 
+          rgba(139, 92, 246, 0.1), 
+          transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s ease;
+        opacity: 0;
       }}
 
       .person-card:hover {{
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        border-color: rgba(102, 126, 234, 0.5);
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        border-color: rgba(139, 92, 246, 0.4);
+      }}
+
+      .person-card:hover::before {{
+        opacity: 1;
+        transform: rotate(45deg) translate(20%, 20%);
+      }}
+
+      /* Photo frames in person cards */
+      .person-photo {{
+        background: linear-gradient(45deg, 
+          rgba(139, 92, 246, 0.8), 
+          rgba(236, 72, 153, 0.8));
+        padding: 3px;
+        border-radius: 50%;
+        animation: photoGlow 4s ease infinite;
+      }}
+
+      @keyframes photoGlow {{
+        0%, 100% {{ box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }}
+        50% {{ box-shadow: 0 0 25px rgba(236, 72, 153, 0.4); }}
       }}
 
       /* Decorative elements */
       .decorative-line {{
-        background: linear-gradient(90deg, transparent, #667eea, transparent);
-        height: 2px;
-        border-radius: 1px;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(139, 92, 246, 0.4), 
+          rgba(236, 72, 153, 0.4), 
+          rgba(139, 92, 246, 0.4), 
+          transparent);
+        height: 3px;
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+      }}
+
+      .decorative-line::before {{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.8), 
+          transparent);
+        animation: lineShimmer 4s ease infinite;
+      }}
+
+      @keyframes lineShimmer {{
+        0% {{ left: -100%; }}
+        100% {{ left: 100%; }}
       }}
 
       /* Custom scrollbar */
       ::-webkit-scrollbar {{
-        width: 8px;
+        width: 10px;
       }}
       ::-webkit-scrollbar-track {{
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
       }}
       ::-webkit-scrollbar-thumb {{
-        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-        border-radius: 10px;
+        background: linear-gradient(180deg, rgba(139, 92, 246, 0.6), rgba(236, 72, 153, 0.6));
+        border-radius: 5px;
       }}
       ::-webkit-scrollbar-thumb:hover {{
-        background: linear-gradient(45deg, #ff5252, #26a69a);
+        background: linear-gradient(180deg, rgba(139, 92, 246, 0.8), rgba(236, 72, 153, 0.8));
+      }}
+
+      /* Typography */
+      .subtitle-text {{
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        color: #374151;
+      }}
+
+      .footer-text {{
+        font-family: "Dancing Script", cursive;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }}
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {{
+        .animated-sticker {{
+          font-size: 1.2rem;
+          opacity: 0.4;
+        }}
+        
+        .main-container {{
+          margin: 0.5rem;
+          padding: 1.5rem;
+        }}
+        
+        .title-gradient {{
+          font-size: 3rem;
+        }}
       }}
     </style>
   </head>
-  <body class="p-4 sm:p-6 md:p-8 lg:p-10 min-h-screen relative">
-    <!-- Animated background elements -->
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+  <body class="p-2 sm:p-4 md:p-6 lg:p-8 min-h-screen relative">
+    <!-- Animated stickers -->
+    <div class="animated-sticker sticker-1">🎉</div>
+    <div class="animated-sticker sticker-2">🎂</div>
+    <div class="animated-sticker sticker-3">✨</div>
+    <div class="animated-sticker sticker-4">🎈</div>
+    <div class="animated-sticker sticker-5">🌟</div>
+    <div class="animated-sticker sticker-6">🎊</div>
+    
+    <!-- Enhanced sparkles -->
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
 
-    <div class="main-container p-6 sm:p-8 md:p-10 lg:p-12 max-w-6xl mx-auto rounded-3xl shadow-2xl">
+    <div class="main-container p-6 sm:p-8 md:p-10 lg:p-12 max-w-6xl mx-auto rounded-3xl">
       <!-- Header Section -->
       <div class="text-center mb-12">
-        <div class="decorative-line mb-6"></div>
-        <h1 class="title-gradient text-6xl sm:text-7xl font-extrabold mb-4">
+        <div class="decorative-line mb-8 w-48 mx-auto"></div>
+        <h1 class="title-gradient text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
           🎉 SLAM BOOK 🎉
         </h1>
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-700 mb-2">
+        <h2 class="subtitle-text text-2xl sm:text-3xl mb-4">
           A Collection of Memories & Messages
         </h2>
-        <p class="text-lg text-gray-600">
+        <p class="text-lg text-gray-600 mb-2">
           Click on any person's card to read their special messages
         </p>
-        <div class="decorative-line mt-6"></div>
+        <div class="decorative-line mt-8 w-48 mx-auto"></div>
       </div>
 
       <!-- Cover Image Section -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-16">
         <div class="cover-image inline-block">
-                     <img
-             src="mainPage.png"
-             alt="Slam Book Cover"
-             class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl shadow-2xl object-cover"
-           />
+          <img
+            src="mainPage.png"
+            alt="Slam Book Cover"
+            class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl shadow-2xl object-cover"
+          />
         </div>
       </div>
 
       <!-- People Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
 """
 
-    # Add person cards
+    # Add person cards with enhanced styling
     for i, (person_data, html_filename) in enumerate(people_data, 1):
         name = extract_name_from_data(person_data)
         safe_name = re.sub(r'[^\w\s-]', '', name).strip()
@@ -278,18 +481,18 @@ def create_main_slam_book_page(people_data, output_dir):
         
         html_content += f"""
         <!-- Person {i} -->
-        <div class="person-card p-6 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('{html_filename}', '_blank')">
+        <div class="person-card p-8 rounded-3xl shadow-lg cursor-pointer" onclick="window.open('{html_filename}', '_blank')">
           <div class="text-center">
-            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-4 border-white">
+            <div class="person-photo w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden shadow-xl">
               <img
                 src="{photo_src}"
                 alt="{name}'s Photo"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover rounded-full"
               />
             </div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">{name}</h3>
-            <p class="text-sm text-gray-600 mb-4">Click to read their messages</p>
-            <div class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">{name}</h3>
+            <p class="text-sm text-gray-600 mb-6">Click to read their messages</p>
+            <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
               📖 Open Slam Book
             </div>
           </div>
@@ -302,26 +505,33 @@ def create_main_slam_book_page(people_data, output_dir):
 
       <!-- Footer -->
       <div class="text-center">
-        <div class="decorative-line mb-4"></div>
-        <p class="text-gray-600 text-sm">
+        <div class="decorative-line mb-6 w-64 mx-auto"></div>
+        <p class="footer-text">
           ✨ Generated on {datetime.now().strftime('%B %d, %Y at %I:%M %p')} | {len(people_data)} Entries ✨
         </p>
-        <div class="decorative-line mt-4"></div>
+        <div class="decorative-line mt-6 w-64 mx-auto"></div>
       </div>
     </div>
 
     <script>
-      // Add some interactive effects
+      // Enhanced interactive effects
       document.addEventListener('DOMContentLoaded', function() {{
         const cards = document.querySelectorAll('.person-card');
+        
         cards.forEach(card => {{
           card.addEventListener('mouseenter', function() {{
-            this.style.transform = 'translateY(-10px) scale(1.05)';
+            this.style.transform = 'translateY(-12px) scale(1.05)';
+            this.style.transition = 'all 0.4s ease';
           }});
+          
           card.addEventListener('mouseleave', function() {{
             this.style.transform = 'translateY(0) scale(1)';
+            this.style.transition = 'all 0.4s ease';
           }});
         }});
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
       }});
     </script>
   </body>
@@ -382,16 +592,18 @@ def main():
         
         print(f"\n✅ Successfully generated main slam book page!")
         print(f"📁 Main page saved as: main_slam_book.html")
-        print(f"📸 Cover image: mainPage.jpg")
+        print(f"📸 Cover image: mainPage.png")
         print(f"👥 Total entries: {len(people_data)}")
         
         print(f"\n🎨 Features of the main slam book page:")
-        print("   • Beautiful animated design with stars and particles")
-        print("   • Cover image with rotating border animation")
-        print("   • Interactive person cards with hover effects")
+        print("   • Beautiful elegant design with darker backgrounds")
+        print("   • Animated stickers and floating elements")
+        print("   • Cover image with enhanced oscillating border animation")
+        print("   • Interactive person cards with sophisticated hover effects")
         print("   • Click to open individual slam book pages")
-        print("   • Responsive design for all devices")
+        print("   • Enhanced mobile responsive design")
         print("   • Professional typography and spacing")
+        print("   • Consistent with individual page styling")
         print("   • Ready to open in any web browser")
             
     except FileNotFoundError:
