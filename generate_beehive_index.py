@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Generate Bee Hive Index HTML
+Generate Bee Hive Index HTML with Performance Optimizations
 Dynamically creates the bee hive index page by scanning available slam book entries
+Features: Lazy loading, progressive loading, image optimization, loading states
 """
 
 import os
@@ -120,7 +121,7 @@ def generate_js_array(hexagon_data):
     return '\n'.join(js_lines)
 
 def generate_beehive_html(hexagon_data):
-    """Generate the complete bee hive HTML"""
+    """Generate the complete bee hive HTML with performance optimizations"""
     
     js_array = generate_js_array(hexagon_data)
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -131,7 +132,15 @@ def generate_beehive_html(hexagon_data):
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🐝 Happy 40th Birthday Sumukh! 🐝</title>
+    
+    <!-- Critical resource preloading -->
     <link rel="preload" href="output/mainPage.png" as="image" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    
+    <!-- Performance hints -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#8b5cf6" />
+    
     <style>
       :root {{
         /* -- Color Palette -- */
@@ -148,7 +157,11 @@ def generate_beehive_html(hexagon_data):
         --prominent-hex-size: 22vw;
       }}
 
-      /* --- Basic Setup --- */
+      /* --- Performance-optimized Basic Setup --- */
+      * {{
+        box-sizing: border-box;
+      }}
+      
       body {{
         margin: 0;
         font-family: 'Arial', sans-serif;
@@ -167,9 +180,11 @@ def generate_beehive_html(hexagon_data):
         position: relative;
         /* Enable smooth scrolling on mobile */
         -webkit-overflow-scrolling: touch;
+        /* Optimize rendering */
+        will-change: scroll-position;
       }}
 
-      /* Enhanced background pattern with darker theme */
+      /* Optimized background pattern with reduced complexity */
       body::before {{
         content: "";
         position: fixed;
@@ -179,30 +194,23 @@ def generate_beehive_html(hexagon_data):
         height: 100%;
         background-image: radial-gradient(
             circle at 25% 25%,
-            rgba(139, 92, 246, 0.1) 0%,
+            rgba(139, 92, 246, 0.08) 0%,
             transparent 50%
           ),
-          radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 25% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-          radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-          linear-gradient(45deg, transparent 49%, rgba(99, 102, 241, 0.05) 50%, transparent 51%),
-          linear-gradient(-45deg, transparent 49%, rgba(236, 72, 153, 0.05) 50%, transparent 51%);
-        background-size: 250px 250px, 200px 200px, 220px 220px, 280px 280px, 60px 60px, 60px 60px;
+          radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+        background-size: 400px 400px, 300px 300px;
         z-index: -2;
-        animation: patternMove 25s ease-in-out infinite;
+        /* Reduce animation for better performance */
+        animation: patternMove 30s ease-in-out infinite;
+        will-change: background-position;
       }}
 
       @keyframes patternMove {{
-        0%,
-        100% {{
-          background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%, 0px 0px, 30px 30px;
-        }}
-        50% {{
-          background-position: 30% 30%, 70% 30%, 30% 70%, 70% 70%, 30px 30px, 0px 0px;
-        }}
+        0%, 100% {{ background-position: 0% 0%, 100% 100%; }}
+        50% {{ background-position: 30% 30%, 70% 70%; }}
       }}
 
-      /* --- Floating Particles --- */
+      /* --- Reduced Floating Particles for performance --- */
       .floating-particles {{
         position: fixed;
         width: 100%;
@@ -217,15 +225,16 @@ def generate_beehive_html(hexagon_data):
         position: absolute;
         background: radial-gradient(circle, #8b5cf6, #ec4899);
         border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
+        animation: float 8s ease-in-out infinite;
+        will-change: transform;
       }}
 
       @keyframes float {{
-        0%, 100% {{ transform: translateY(0px) rotate(0deg); opacity: 0.7; }}
-        50% {{ transform: translateY(-20px) rotate(180deg); opacity: 1; }}
+        0%, 100% {{ transform: translateY(0px) rotate(0deg); opacity: 0.6; }}
+        50% {{ transform: translateY(-15px) rotate(180deg); opacity: 0.8; }}
       }}
 
-      /* --- Confetti Styles --- */
+      /* --- Optimized Confetti Styles --- */
       .confetti-container {{
         position: fixed;
         top: 0;
@@ -238,46 +247,24 @@ def generate_beehive_html(hexagon_data):
 
       .confetti {{
         position: absolute;
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         background: #f39c12;
-        animation: confettiFall 3s linear forwards;
+        animation: confettiFall 2.5s linear forwards;
+        will-change: transform;
       }}
 
-      .confetti:nth-child(odd) {{
-        background: #e74c3c;
-        border-radius: 50%;
-      }}
-
-      .confetti:nth-child(3n) {{
-        background: #3498db;
-      }}
-
-      .confetti:nth-child(4n) {{
-        background: #2ecc71;
-      }}
-
-      .confetti:nth-child(5n) {{
-        background: #9b59b6;
-      }}
-
-      .confetti:nth-child(6n) {{
-        background: #f1c40f;
-        transform: rotate(45deg);
-      }}
+      .confetti:nth-child(odd) {{ background: #e74c3c; border-radius: 50%; }}
+      .confetti:nth-child(3n) {{ background: #3498db; }}
+      .confetti:nth-child(4n) {{ background: #2ecc71; }}
+      .confetti:nth-child(5n) {{ background: #9b59b6; }}
 
       @keyframes confettiFall {{
-        0% {{
-          opacity: 1;
-          transform: translateY(-100vh) rotate(0deg);
-        }}
-        100% {{
-          opacity: 0;
-          transform: translateY(100vh) rotate(720deg);
-        }}
+        0% {{ opacity: 1; transform: translateY(-100vh) rotate(0deg); }}
+        100% {{ opacity: 0; transform: translateY(100vh) rotate(360deg); }}
       }}
 
-      /* --- Main wrapper to ensure proper spacing --- */
+      /* --- Main wrapper --- */
       #hive-wrapper {{
         display: flex;
         flex-direction: column;
@@ -290,7 +277,6 @@ def generate_beehive_html(hexagon_data):
         margin: 0 auto;
       }}
 
-      /* Ensure beehive container can scroll horizontally on mobile */
       .beehive-container {{
         width: 100%;
         overflow-x: auto;
@@ -301,7 +287,6 @@ def generate_beehive_html(hexagon_data):
         scrollbar-color: #8b5cf6 transparent;
       }}
 
-      /* Custom scrollbar for webkit browsers */
       .beehive-container::-webkit-scrollbar {{
         height: 8px;
       }}
@@ -314,14 +299,8 @@ def generate_beehive_html(hexagon_data):
       .beehive-container::-webkit-scrollbar-thumb {{
         background: linear-gradient(90deg, #8b5cf6, #ec4899);
         border-radius: 4px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
       }}
 
-      .beehive-container::-webkit-scrollbar-thumb:hover {{
-        background: linear-gradient(90deg, #7c3aed, #db2777);
-      }}
-
-      /* Mobile scroll hint */
       .scroll-hint {{
         display: none;
         position: fixed;
@@ -344,10 +323,7 @@ def generate_beehive_html(hexagon_data):
       }}
 
       @media (max-width: 768px) {{
-        .scroll-hint {{
-          display: block;
-          animation-duration: 3s;
-        }}
+        .scroll-hint {{ display: block; }}
       }}
 
       .beehive {{
@@ -358,28 +334,17 @@ def generate_beehive_html(hexagon_data):
         align-items: center;
       }}
 
-      /* --- Keyframes for the pulsing glow effect --- */
+      /* --- Optimized pulse glow effect --- */
       @keyframes pulse-glow {{
-        0%,
-        100% {{
-          box-shadow: 
-            0 0 1.5vw #8b5cf6,
-            0 0 3vw rgba(139, 92, 246, 0.3),
-            0 10px 30px rgba(139, 92, 246, 0.4);
+        0%, 100% {{
+          box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(139, 92, 246, 0.3);
         }}
         50% {{
-          box-shadow: 
-            0 0 3vw #8b5cf6,
-            0 0 6vw rgba(139, 92, 246, 0.5),
-            0 15px 40px rgba(139, 92, 246, 0.6);
+          box-shadow: 0 0 30px rgba(139, 92, 246, 0.6), 0 15px 40px rgba(139, 92, 246, 0.4);
         }}
       }}
 
-      /*
-        ========================================
-        >> PROMINENT HEXAGON STYLES <<
-        ========================================
-        */
+      /* --- PROMINENT HEXAGON STYLES --- */
       #prominent-hexagon-container {{
         display: flex;
         justify-content: center;
@@ -394,45 +359,30 @@ def generate_beehive_html(hexagon_data):
       }}
 
       #prominent-hexagon-container .hexagon a {{
-        /* Apply the pulsing glow animation with enhanced 3D shadow */
         animation: pulse-glow 3s infinite ease-in-out;
         border: none !important;
         background: linear-gradient(135deg, #6366f1, #4f46e5, #3730a3);
-        transform: translateZ(25px);
         box-shadow: 
           0 15px 35px rgba(0, 0, 0, 0.4),
-          0 8px 20px rgba(0, 0, 0, 0.3),
           0 0 40px rgba(139, 92, 246, 0.6),
-          inset 0 3px 0 rgba(255, 255, 255, 0.2),
-          inset 0 -3px 0 rgba(0, 0, 0, 0.2),
-          /* Prominent 3D thickness */
-          0 0 0 4px #5b21b6,
-          0 0 0 8px #4c1d95,
-          0 0 0 12px #3c1677;
+          0 0 0 4px #5b21b6;
+        will-change: box-shadow;
       }}
 
       #prominent-hexagon-container .hexagon img {{
         padding: 0 !important;
         border-radius: 0 !important;
         transform: scale(1.3);
-        transition: transform 0.5s ease;
+        transition: transform 0.3s ease;
+        will-change: transform;
       }}
 
-      #prominent-hexagon-container .hexagon:hover img {{
-        transform: scale(1.4);
-      }}
-
-      /*
-        ========================================
-        >> MAIN HIVE GRID STYLES <<
-        ========================================
-        */
+      /* --- MAIN HIVE GRID STYLES --- */
       #hive-grid-container {{
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
-        /* Negative margin pulls the grid up to nest under the prominent hexagon */
         margin-top: calc(var(--prominent-hex-size) * -0.15);
       }}
 
@@ -442,18 +392,16 @@ def generate_beehive_html(hexagon_data):
         margin-top: calc(var(--hex-size) * -0.134);
       }}
 
-      .hive-row:first-child {{
-        margin-top: 0;
-      }}
+      .hive-row:first-child {{ margin-top: 0; }}
 
-      /* --- General Hexagon Styles (applies to all) --- */
+      /* --- Optimized Hexagon Styles --- */
       .hexagon {{
         position: relative;
         width: var(--hex-size);
         height: calc(var(--hex-size) * 1.1547);
         margin: 0 var(--hex-gap);
-        transition: transform 0.3s ease-in-out;
-        transform-style: preserve-3d;
+        transition: transform 0.2s ease-in-out;
+        will-change: transform;
       }}
 
       .hexagon a {{
@@ -465,85 +413,73 @@ def generate_beehive_html(hexagon_data):
         background: linear-gradient(135deg, #4a5568, #2d3748);
         text-decoration: none;
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         overflow: hidden;
         border: none;
-        /* Enhanced 3D thickness effects */
         box-shadow: 
           0 8px 16px rgba(0, 0, 0, 0.3),
-          0 4px 8px rgba(0, 0, 0, 0.2),
-          inset 0 2px 0 rgba(255, 255, 255, 0.15),
-          inset 0 -2px 0 rgba(0, 0, 0, 0.2),
-          /* 3D thickness layers */
-          0 0 0 2px #3a4556,
-          0 0 0 4px #2a3441,
-          0 0 0 6px #1a242f;
-        transform: translateZ(0);
+          0 0 0 2px #3a4556;
+        will-change: transform, box-shadow;
       }}
 
       .hexagon img {{
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease;
         padding: 3px;
         border-radius: 4px;
+        will-change: transform;
       }}
 
-      /* --- Enhanced 3D Interactivity --- */
+      /* --- Performance-optimized loading states --- */
+      .hexagon.loading a {{
+        background: linear-gradient(135deg, #64748b, #475569);
+        animation: shimmer 1.5s ease-in-out infinite;
+      }}
+
+      @keyframes shimmer {{
+        0%, 100% {{ opacity: 1; }}
+        50% {{ opacity: 0.7; }}
+      }}
+
+      .hexagon.loading img {{
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }}
+
+      .hexagon.loaded img {{
+        opacity: 1;
+      }}
+
+      /* --- Reduced hover effects for better performance --- */
       .hexagon a:hover,
       .hexagon a:focus {{
-        transform: scale(1.1) translateZ(15px) rotateX(5deg);
-        z-index: 10;
+        transform: scale(1.05);
         box-shadow: 
-          0 20px 40px rgba(0, 0, 0, 0.4),
-          0 12px 25px rgba(0, 0, 0, 0.3),
-          0 0 30px rgba(139, 92, 246, 0.4),
-          inset 0 3px 0 rgba(255, 255, 255, 0.25),
-          inset 0 -3px 0 rgba(0, 0, 0, 0.3),
-          /* Enhanced 3D thickness on hover */
-          0 0 0 3px #4a5568,
-          0 0 0 6px #3a4556,
-          0 0 0 9px #2a3441;
-      }}
-
-      .hexagon a:focus {{
-        outline: 3px solid #8b5cf6;
-        outline-offset: 5px;
+          0 12px 24px rgba(0, 0, 0, 0.4),
+          0 0 20px rgba(139, 92, 246, 0.3);
       }}
 
       .hexagon a:hover img,
       .hexagon a:focus img {{
-        transform: scale(1.15);
+        transform: scale(1.1);
       }}
 
-      /* --- Responsive Design for Mobile --- */
+      /* --- Mobile Responsive Design --- */
       @media (max-width: 768px) {{
         :root {{
           --hex-size: 18vw;
           --prominent-hex-size: 45vw;
         }}
         
-        body {{
-          padding: 10px;
-          overflow-x: auto;
-        }}
+        body {{ padding: 10px; }}
+        #hive-wrapper {{ padding: 2rem 0.5rem; width: max-content; min-width: 100vw; }}
         
-        #hive-wrapper {{
-          padding: 2rem 0.5rem;
-          width: max-content;
-          min-width: 100vw;
-        }}
-
-        /* Reduce 3D effects on mobile for performance */
-        .hexagon a:hover,
-        .hexagon a:focus {{
-          transform: scale(1.1) translateZ(5px);
-        }}
-
-        #prominent-hexagon-container .hexagon img {{
-          transform: scale(1.2);
-        }}
+        /* Disable heavy effects on mobile */
+        .hexagon a:hover {{ transform: scale(1.02); }}
+        .particle {{ animation-duration: 10s; }}
+        body::before {{ animation: none; }}
       }}
 
       @media (max-width: 480px) {{
@@ -552,94 +488,89 @@ def generate_beehive_html(hexagon_data):
           --prominent-hex-size: 50vw;
         }}
         
-        body {{
-          padding: 5px;
-        }}
-        
-        #hive-wrapper {{
-          padding: 1.5rem 0.25rem;
-          min-width: 120vw; /* Allow wider than viewport for scrolling */
-        }}
-        
-        .beehive {{
-          transform: scale(0.9);
-        }}
+        #hive-wrapper {{ min-width: 120vw; }}
+        .beehive {{ transform: scale(0.9); }}
       }}
 
-      @media (max-width: 360px) {{
-        :root {{
-          --hex-size: 25vw;
-          --prominent-hex-size: 55vw;
-        }}
-        
-        #hive-wrapper {{
-          min-width: 140vw; /* Even wider for very small screens */
-        }}
-        
-        .beehive {{
-          transform: scale(0.8);
-        }}
-      }}
-
-      /* --- Hexagon appear animation --- */
+      /* --- Optimized appearance animations --- */
       .hexagon {{
-        animation: hexAppear 0.8s ease-out forwards;
         opacity: 0;
-        transform: scale(0) rotate(180deg) translateZ(-50px);
+        transform: scale(0.8) translateY(20px);
+        animation: hexAppear 0.5s ease-out forwards;
       }}
 
-      /* Prominent hexagon appears immediately without delay */
       #prominent-hexagon-container .hexagon {{
         animation: hexAppearFast 0.3s ease-out forwards;
         animation-delay: 0s !important;
       }}
 
       @keyframes hexAppear {{
-        0% {{
-          opacity: 0;
-          transform: scale(0) rotate(180deg) translateZ(-50px);
-        }}
-        70% {{
-          transform: scale(1.1) rotate(-10deg) translateZ(10px);
-        }}
-        100% {{
-          opacity: 1;
-          transform: scale(1) rotate(0deg) translateZ(0px);
-        }}
+        0% {{ opacity: 0; transform: scale(0.8) translateY(20px); }}
+        100% {{ opacity: 1; transform: scale(1) translateY(0); }}
       }}
 
       @keyframes hexAppearFast {{
-        0% {{
-          opacity: 0;
-          transform: scale(0.8);
-        }}
-        100% {{
-          opacity: 1;
-          transform: scale(1);
-        }}
+        0% {{ opacity: 0; transform: scale(0.9); }}
+        100% {{ opacity: 1; transform: scale(1); }}
       }}
 
+      /* Staggered animation delays */
       .hexagon:nth-child(1) {{ animation-delay: 0.1s; }}
-      .hexagon:nth-child(2) {{ animation-delay: 0.2s; }}
-      .hexagon:nth-child(3) {{ animation-delay: 0.3s; }}
-      .hexagon:nth-child(4) {{ animation-delay: 0.4s; }}
-      .hexagon:nth-child(5) {{ animation-delay: 0.5s; }}
-      .hexagon:nth-child(6) {{ animation-delay: 0.6s; }}
-      .hexagon:nth-child(7) {{ animation-delay: 0.7s; }}
+      .hexagon:nth-child(2) {{ animation-delay: 0.15s; }}
+      .hexagon:nth-child(3) {{ animation-delay: 0.2s; }}
+      .hexagon:nth-child(4) {{ animation-delay: 0.25s; }}
+      .hexagon:nth-child(5) {{ animation-delay: 0.3s; }}
+      .hexagon:nth-child(6) {{ animation-delay: 0.35s; }}
+      .hexagon:nth-child(7) {{ animation-delay: 0.4s; }}
+
+      /* --- Loading indicator --- */
+      .page-loader {{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(71, 85, 105, 0.9), rgba(67, 56, 202, 0.9));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }}
+
+      .loader-hexagon {{
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        animation: loaderSpin 1s ease-in-out infinite;
+      }}
+
+      @keyframes loaderSpin {{
+        0%, 100% {{ transform: rotate(0deg) scale(1); }}
+        50% {{ transform: rotate(180deg) scale(1.1); }}
+      }}
+
+      .page-loader.hidden {{
+        opacity: 0;
+        pointer-events: none;
+      }}
     </style>
   </head>
   <body>
+    <!-- Page loader -->
+    <div id="page-loader" class="page-loader">
+      <div class="loader-hexagon"></div>
+    </div>
+
     <div id="confetti-container" class="confetti-container"></div>
 
+    <!-- Reduced floating particles for better performance -->
     <div class="floating-particles">
-      <div class="particle" style="width: 6px; height: 6px; left: 10%; top: 20%; animation-delay: 0s;"></div>
-      <div class="particle" style="width: 4px; height: 4px; left: 20%; top: 60%; animation-delay: 1s;"></div>
-      <div class="particle" style="width: 8px; height: 8px; left: 30%; top: 10%; animation-delay: 2s;"></div>
-      <div class="particle" style="width: 5px; height: 5px; left: 40%; top: 70%; animation-delay: 3s;"></div>
-      <div class="particle" style="width: 7px; height: 7px; left: 60%; top: 30%; animation-delay: 4s;"></div>
-      <div class="particle" style="width: 4px; height: 4px; left: 70%; top: 80%; animation-delay: 5s;"></div>
-      <div class="particle" style="width: 6px; height: 6px; left: 80%; top: 15%; animation-delay: 0.5s;"></div>
-      <div class="particle" style="width: 5px; height: 5px; left: 90%; top: 50%; animation-delay: 1.5s;"></div>
+      <div class="particle" style="width: 6px; height: 6px; left: 15%; top: 25%; animation-delay: 0s;"></div>
+      <div class="particle" style="width: 4px; height: 4px; left: 85%; top: 75%; animation-delay: 2s;"></div>
+      <div class="particle" style="width: 5px; height: 5px; left: 50%; top: 10%; animation-delay: 4s;"></div>
+      <div class="particle" style="width: 7px; height: 7px; left: 20%; top: 80%; animation-delay: 6s;"></div>
     </div>
 
     <main id="hive-wrapper">
@@ -649,48 +580,82 @@ def generate_beehive_html(hexagon_data):
           <div id="hive-grid-container"></div>
         </div>
       </div>
-      <div class="scroll-hint">Scroll to see more!</div>
+      <div class="scroll-hint">Scroll to see more! 👈</div>
     </main>
 
     <script>
-      // Confetti blast function
+      // Performance optimized confetti with reduced particles
       function createConfetti() {{
         const container = document.getElementById('confetti-container');
-        const colors = ['#f39c12', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#f1c40f'];
+        const colors = ['#f39c12', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6'];
         
-        // Create 150 confetti pieces
-        for (let i = 0; i < 150; i++) {{
+        // Reduced to 75 particles for better performance
+        for (let i = 0; i < 75; i++) {{
           const confetti = document.createElement('div');
           confetti.className = 'confetti';
           confetti.style.left = Math.random() * 100 + 'vw';
           confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDelay = Math.random() * 3 + 's';
-          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-          
-          // Random shapes
-          if (Math.random() > 0.5) {{
-            confetti.style.borderRadius = '50%';
-          }}
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
           
           container.appendChild(confetti);
           
-          // Remove confetti after animation
+          // Clean up after animation
           setTimeout(() => {{
             if (confetti.parentNode) {{
               confetti.parentNode.removeChild(confetti);
             }}
-          }}, 6000);
+          }}, 4000);
         }}
         
-        // Remove container after all animations complete
+        // Hide container after animations
         setTimeout(() => {{
           container.style.display = 'none';
-        }}, 6000);
+        }}, 4000);
       }}
 
+      // Intersection Observer for lazy loading
+      const imageObserver = new IntersectionObserver((entries, observer) => {{
+        entries.forEach(entry => {{
+          if (entry.isIntersecting) {{
+            const hexagon = entry.target;
+            const img = hexagon.querySelector('img');
+            
+            if (img && img.dataset.src) {{
+              // Start loading the image
+              hexagon.classList.add('loading');
+              
+              const imageLoader = new Image();
+              imageLoader.onload = () => {{
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                hexagon.classList.remove('loading');
+                hexagon.classList.add('loaded');
+                observer.unobserve(hexagon);
+              }};
+              
+              imageLoader.onerror = () => {{
+                // Fallback to placeholder or error image
+                img.src = 'output/mainPage.png';
+                hexagon.classList.remove('loading');
+                hexagon.classList.add('loaded');
+                observer.unobserve(hexagon);
+              }};
+              
+              imageLoader.src = img.dataset.src;
+            }}
+          }}
+        }});
+      }}, {{
+        rootMargin: '100px', // Start loading 100px before entering viewport
+        threshold: 0.1
+      }});
+
       document.addEventListener("DOMContentLoaded", () => {{
-        // Helper function to create a single hexagon element
-        function createHexagon(hexData) {{
+        const pageLoader = document.getElementById('page-loader');
+        
+        // Helper function to create a single hexagon element with lazy loading
+        function createHexagon(hexData, isProminent = false) {{
           const hexagon = document.createElement("div");
           hexagon.classList.add("hexagon");
 
@@ -700,19 +665,24 @@ def generate_beehive_html(hexagon_data):
           link.setAttribute('tabindex', '0');
 
           const image = document.createElement("img");
-          image.src = hexData.imageUrl;
           image.alt = hexData.title;
+          
+          // Implement lazy loading for non-prominent images
+          if (isProminent) {{
+            image.src = hexData.imageUrl;
+            hexagon.classList.add('loaded');
+          }} else {{
+            image.dataset.src = hexData.imageUrl;
+            image.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzY0NzQ4YiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD48L3N2Zz4='; // Base64 placeholder
+            hexagon.classList.add('loading');
+          }}
 
           link.appendChild(image);
           hexagon.appendChild(link);
           return hexagon;
         }}
 
-        // Preload the main hexagon image for immediate display
-        const mainImage = new Image();
-        mainImage.src = 'output/mainPage.png';
-        
-        // Create prominent hexagon immediately
+        // Priority loading: Create prominent hexagon immediately
         const prominentContainer = document.getElementById("prominent-hexagon-container");
         const prominentData = {{
           imageUrl: 'output/mainPage.png',
@@ -720,81 +690,68 @@ def generate_beehive_html(hexagon_data):
           title: "Sumukh's 40th Birthday",
           isProminent: true
         }};
-        prominentContainer.appendChild(createHexagon(prominentData));
         
-        // Trigger confetti blast on page load (after main hexagon is created)
-        setTimeout(createConfetti, 500);
+        const prominentHex = createHexagon(prominentData, true);
+        prominentContainer.appendChild(prominentHex);
 
         const allHexagonsData = [
 {js_array}
         ];
 
-        // --- Logic to build the hive ---
-
-        // Get only the regular hexagon data (prominent already created above)
+        // Progressive loading strategy
         const gridData = allHexagonsData.filter((hex) => !hex.isProminent);
         const gridContainer = document.getElementById("hive-grid-container");
-
-        // 3. Create and append the rest of the hive grid
-        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 3]; // Layout for the main grid ({len(hexagon_data)-1} hexagons total)
+        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 3];
         let dataIndex = 0;
 
-        rowLayout.forEach((hexCount) => {{
+        // Build the hive grid with lazy loading
+        rowLayout.forEach((hexCount, rowIndex) => {{
           const row = document.createElement("div");
           row.classList.add("hive-row");
+          
           for (let i = 0; i < hexCount; i++) {{
             if (dataIndex >= gridData.length) break;
-            row.appendChild(createHexagon(gridData[dataIndex]));
+            
+            const hexagon = createHexagon(gridData[dataIndex]);
+            row.appendChild(hexagon);
+            
+            // Start observing for lazy loading
+            imageObserver.observe(hexagon);
+            
             dataIndex++;
           }}
           gridContainer.appendChild(row);
         }});
 
-        // Create more floating particles dynamically
-        function createParticles() {{
-          const container = document.querySelector('.floating-particles');
-          for (let i = 0; i < 15; i++) {{
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.width = Math.random() * 8 + 3 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            container.appendChild(particle);
-          }}
-        }}
-
-        createParticles();
+        // Hide page loader after critical content is ready
+        setTimeout(() => {{
+          pageLoader.classList.add('hidden');
+          
+          // Trigger confetti after loader is hidden
+          setTimeout(createConfetti, 300);
+        }}, 200);
 
         // Mobile scroll hint management
         const scrollHint = document.querySelector('.scroll-hint');
-        let scrollTimeout;
-        
-        // Hide scroll hint after user interaction
         if (scrollHint) {{
           const hideHint = () => {{
             scrollHint.style.opacity = '0';
             setTimeout(() => scrollHint.style.display = 'none', 300);
           }};
           
-          // Hide hint after 5 seconds
-          setTimeout(hideHint, 5000);
+          setTimeout(hideHint, 6000);
           
-          // Hide hint on scroll
           const beehiveContainer = document.querySelector('.beehive-container');
           if (beehiveContainer) {{
             beehiveContainer.addEventListener('scroll', () => {{
-              clearTimeout(scrollTimeout);
-              scrollTimeout = setTimeout(hideHint, 1000);
-            }});
+              setTimeout(hideHint, 1000);
+            }}, {{ once: true }});
           }}
           
-          // Hide hint on touch
           document.addEventListener('touchstart', hideHint, {{ once: true }});
         }}
 
-        // Add keyboard navigation
+        // Keyboard navigation
         document.addEventListener('keydown', function(event) {{
           if (event.key === 'Enter' || event.key === ' ') {{
             const focused = document.activeElement;
@@ -804,10 +761,29 @@ def generate_beehive_html(hexagon_data):
             }}
           }}
         }});
+
+        // Preload next batch of images on user interaction
+        let preloadTriggered = false;
+        const triggerPreload = () => {{
+          if (preloadTriggered) return;
+          preloadTriggered = true;
+          
+          // Preload first few images for smoother scrolling
+          const firstBatch = gridData.slice(0, 10);
+          firstBatch.forEach(hexData => {{
+            const preloadImg = new Image();
+            preloadImg.src = hexData.imageUrl;
+          }});
+        }};
+
+        // Trigger preload on first user interaction
+        ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {{
+          document.addEventListener(event, triggerPreload, {{ once: true, passive: true }});
+        }});
       }});
     </script>
     
-    <!-- Generated on {current_time} -->
+    <!-- Generated on {current_time} with performance optimizations -->
   </body>
 </html>'''
 
