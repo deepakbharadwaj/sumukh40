@@ -162,8 +162,11 @@ def generate_beehive_html(hexagon_data):
         );
         min-height: 100vh;
         overflow-x: auto;
+        overflow-y: auto;
         padding: 20px;
         position: relative;
+        /* Enable smooth scrolling on mobile */
+        -webkit-overflow-scrolling: touch;
       }}
 
       /* Enhanced background pattern with darker theme */
@@ -282,6 +285,77 @@ def generate_beehive_html(hexagon_data):
         padding: 4rem 1rem;
         position: relative;
         z-index: 2;
+        min-width: 100%;
+        width: max-content;
+        margin: 0 auto;
+      }}
+
+      /* Ensure beehive container can scroll horizontally on mobile */
+      .beehive-container {{
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2rem;
+        scrollbar-width: thin;
+        scrollbar-color: #8b5cf6 transparent;
+      }}
+
+      /* Custom scrollbar for webkit browsers */
+      .beehive-container::-webkit-scrollbar {{
+        height: 8px;
+      }}
+
+      .beehive-container::-webkit-scrollbar-track {{
+        background: rgba(139, 92, 246, 0.1);
+        border-radius: 4px;
+      }}
+
+      .beehive-container::-webkit-scrollbar-thumb {{
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }}
+
+      .beehive-container::-webkit-scrollbar-thumb:hover {{
+        background: linear-gradient(90deg, #7c3aed, #db2777);
+      }}
+
+      /* Mobile scroll hint */
+      .scroll-hint {{
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(139, 92, 246, 0.9);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        z-index: 1000;
+        animation: pulseHint 2s infinite;
+        pointer-events: none;
+      }}
+
+      @keyframes pulseHint {{
+        0%, 100% {{ opacity: 0.7; transform: translateX(-50%) scale(1); }}
+        50% {{ opacity: 1; transform: translateX(-50%) scale(1.05); }}
+      }}
+
+      @media (max-width: 768px) {{
+        .scroll-hint {{
+          display: block;
+          animation-duration: 3s;
+        }}
+      }}
+
+      .beehive {{
+        width: max-content;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }}
 
       /* --- Keyframes for the pulsing glow effect --- */
@@ -306,6 +380,14 @@ def generate_beehive_html(hexagon_data):
         >> PROMINENT HEXAGON STYLES <<
         ========================================
         */
+      #prominent-hexagon-container {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 2rem;
+      }}
+
       #prominent-hexagon-container .hexagon {{
         width: var(--prominent-hex-size);
         height: calc(var(--prominent-hex-size) * 1.1547);
@@ -349,8 +431,9 @@ def generate_beehive_html(hexagon_data):
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
         /* Negative margin pulls the grid up to nest under the prominent hexagon */
-        margin-top: calc(var(--prominent-hex-size) * -0.25);
+        margin-top: calc(var(--prominent-hex-size) * -0.15);
       }}
 
       .hive-row {{
@@ -437,11 +520,19 @@ def generate_beehive_html(hexagon_data):
       /* --- Responsive Design for Mobile --- */
       @media (max-width: 768px) {{
         :root {{
-          --hex-size: 24vw;
-          --prominent-hex-size: 55vw;
+          --hex-size: 18vw;
+          --prominent-hex-size: 45vw;
         }}
+        
+        body {{
+          padding: 10px;
+          overflow-x: auto;
+        }}
+        
         #hive-wrapper {{
           padding: 2rem 0.5rem;
+          width: max-content;
+          min-width: 100vw;
         }}
 
         /* Reduce 3D effects on mobile for performance */
@@ -452,6 +543,41 @@ def generate_beehive_html(hexagon_data):
 
         #prominent-hexagon-container .hexagon img {{
           transform: scale(1.2);
+        }}
+      }}
+
+      @media (max-width: 480px) {{
+        :root {{
+          --hex-size: 22vw;
+          --prominent-hex-size: 50vw;
+        }}
+        
+        body {{
+          padding: 5px;
+        }}
+        
+        #hive-wrapper {{
+          padding: 1.5rem 0.25rem;
+          min-width: 120vw; /* Allow wider than viewport for scrolling */
+        }}
+        
+        .beehive {{
+          transform: scale(0.9);
+        }}
+      }}
+
+      @media (max-width: 360px) {{
+        :root {{
+          --hex-size: 25vw;
+          --prominent-hex-size: 55vw;
+        }}
+        
+        #hive-wrapper {{
+          min-width: 140vw; /* Even wider for very small screens */
+        }}
+        
+        .beehive {{
+          transform: scale(0.8);
         }}
       }}
 
@@ -517,9 +643,13 @@ def generate_beehive_html(hexagon_data):
     </div>
 
     <main id="hive-wrapper">
-      <div id="prominent-hexagon-container"></div>
-
-      <div id="hive-grid-container"></div>
+      <div class="beehive-container">
+        <div class="beehive">
+          <div id="prominent-hexagon-container"></div>
+          <div id="hive-grid-container"></div>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll to see more!</div>
     </main>
 
     <script>
@@ -636,6 +766,33 @@ def generate_beehive_html(hexagon_data):
         }}
 
         createParticles();
+
+        // Mobile scroll hint management
+        const scrollHint = document.querySelector('.scroll-hint');
+        let scrollTimeout;
+        
+        // Hide scroll hint after user interaction
+        if (scrollHint) {{
+          const hideHint = () => {{
+            scrollHint.style.opacity = '0';
+            setTimeout(() => scrollHint.style.display = 'none', 300);
+          }};
+          
+          // Hide hint after 5 seconds
+          setTimeout(hideHint, 5000);
+          
+          // Hide hint on scroll
+          const beehiveContainer = document.querySelector('.beehive-container');
+          if (beehiveContainer) {{
+            beehiveContainer.addEventListener('scroll', () => {{
+              clearTimeout(scrollTimeout);
+              scrollTimeout = setTimeout(hideHint, 1000);
+            }});
+          }}
+          
+          // Hide hint on touch
+          document.addEventListener('touchstart', hideHint, {{ once: true }});
+        }}
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(event) {{
