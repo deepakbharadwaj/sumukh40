@@ -131,6 +131,7 @@ def generate_beehive_html(hexagon_data):
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🐝 Happy 40th Birthday Sumukh! 🐝</title>
+    <link rel="preload" href="output/mainPage.png" as="image" />
     <style>
       :root {{
         /* -- Color Palette -- */
@@ -314,11 +315,18 @@ def generate_beehive_html(hexagon_data):
         /* Apply the pulsing glow animation with enhanced 3D shadow */
         animation: pulse-glow 3s infinite ease-in-out;
         border: none !important;
-        background: transparent;
-        transform: translateZ(20px);
+        background: linear-gradient(135deg, #6366f1, #4f46e5, #3730a3);
+        transform: translateZ(25px);
         box-shadow: 
-          0 10px 30px rgba(139, 92, 246, 0.4),
-          0 5px 15px rgba(0, 0, 0, 0.3);
+          0 15px 35px rgba(0, 0, 0, 0.4),
+          0 8px 20px rgba(0, 0, 0, 0.3),
+          0 0 40px rgba(139, 92, 246, 0.6),
+          inset 0 3px 0 rgba(255, 255, 255, 0.2),
+          inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+          /* Prominent 3D thickness */
+          0 0 0 4px #5b21b6,
+          0 0 0 8px #4c1d95,
+          0 0 0 12px #3c1677;
       }}
 
       #prominent-hexagon-container .hexagon img {{
@@ -371,17 +379,22 @@ def generate_beehive_html(hexagon_data):
         align-items: center;
         width: 100%;
         height: 100%;
-        background: var(--dark-brown);
+        background: linear-gradient(135deg, #4a5568, #2d3748);
         text-decoration: none;
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         transition: all 0.3s ease;
         overflow: hidden;
-        border: 2px solid #6366f1;
-        /* Enhanced 3D shadow effects */
+        border: none;
+        /* Enhanced 3D thickness effects */
         box-shadow: 
-          0 8px 16px rgba(0, 0, 0, 0.2),
-          0 4px 8px rgba(99, 102, 241, 0.3),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          0 8px 16px rgba(0, 0, 0, 0.3),
+          0 4px 8px rgba(0, 0, 0, 0.2),
+          inset 0 2px 0 rgba(255, 255, 255, 0.15),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+          /* 3D thickness layers */
+          0 0 0 2px #3a4556,
+          0 0 0 4px #2a3441,
+          0 0 0 6px #1a242f;
         transform: translateZ(0);
       }}
 
@@ -397,19 +410,23 @@ def generate_beehive_html(hexagon_data):
       /* --- Enhanced 3D Interactivity --- */
       .hexagon a:hover,
       .hexagon a:focus {{
-        transform: scale(1.1) translateZ(10px) rotateX(5deg);
+        transform: scale(1.1) translateZ(15px) rotateX(5deg);
         z-index: 10;
         box-shadow: 
-          0 15px 35px rgba(139, 92, 246, 0.4),
-          0 8px 20px rgba(0, 0, 0, 0.3),
-          0 0 20px rgba(139, 92, 246, 0.6),
-          inset 0 2px 0 rgba(255, 255, 255, 0.2);
-        border-color: #8b5cf6;
+          0 20px 40px rgba(0, 0, 0, 0.4),
+          0 12px 25px rgba(0, 0, 0, 0.3),
+          0 0 30px rgba(139, 92, 246, 0.4),
+          inset 0 3px 0 rgba(255, 255, 255, 0.25),
+          inset 0 -3px 0 rgba(0, 0, 0, 0.3),
+          /* Enhanced 3D thickness on hover */
+          0 0 0 3px #4a5568,
+          0 0 0 6px #3a4556,
+          0 0 0 9px #2a3441;
       }}
 
       .hexagon a:focus {{
         outline: 3px solid #8b5cf6;
-        outline-offset: 3px;
+        outline-offset: 5px;
       }}
 
       .hexagon a:hover img,
@@ -445,6 +462,12 @@ def generate_beehive_html(hexagon_data):
         transform: scale(0) rotate(180deg) translateZ(-50px);
       }}
 
+      /* Prominent hexagon appears immediately without delay */
+      #prominent-hexagon-container .hexagon {{
+        animation: hexAppearFast 0.3s ease-out forwards;
+        animation-delay: 0s !important;
+      }}
+
       @keyframes hexAppear {{
         0% {{
           opacity: 0;
@@ -456,6 +479,17 @@ def generate_beehive_html(hexagon_data):
         100% {{
           opacity: 1;
           transform: scale(1) rotate(0deg) translateZ(0px);
+        }}
+      }}
+
+      @keyframes hexAppearFast {{
+        0% {{
+          opacity: 0;
+          transform: scale(0.8);
+        }}
+        100% {{
+          opacity: 1;
+          transform: scale(1);
         }}
       }}
 
@@ -525,42 +559,6 @@ def generate_beehive_html(hexagon_data):
       }}
 
       document.addEventListener("DOMContentLoaded", () => {{
-        // Trigger confetti blast on page load
-        setTimeout(createConfetti, 500);
-
-        const allHexagonsData = [
-{js_array}
-        ];
-
-        // --- Logic to build the hive ---
-
-        // 1. Find and separate the prominent hexagon data
-        const prominentData = allHexagonsData.find((hex) => hex.isProminent);
-        const gridData = allHexagonsData.filter((hex) => !hex.isProminent);
-
-        const prominentContainer = document.getElementById("prominent-hexagon-container");
-        const gridContainer = document.getElementById("hive-grid-container");
-
-        // 2. Create and append the single prominent hexagon
-        if (prominentData) {{
-          prominentContainer.appendChild(createHexagon(prominentData));
-        }}
-
-        // 3. Create and append the rest of the hive grid
-        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 3]; // Layout for the main grid ({len(hexagon_data)-1} hexagons total)
-        let dataIndex = 0;
-
-        rowLayout.forEach((hexCount) => {{
-          const row = document.createElement("div");
-          row.classList.add("hive-row");
-          for (let i = 0; i < hexCount; i++) {{
-            if (dataIndex >= gridData.length) break;
-            row.appendChild(createHexagon(gridData[dataIndex]));
-            dataIndex++;
-          }}
-          gridContainer.appendChild(row);
-        }});
-
         // Helper function to create a single hexagon element
         function createHexagon(hexData) {{
           const hexagon = document.createElement("div");
@@ -579,6 +577,48 @@ def generate_beehive_html(hexagon_data):
           hexagon.appendChild(link);
           return hexagon;
         }}
+
+        // Preload the main hexagon image for immediate display
+        const mainImage = new Image();
+        mainImage.src = 'output/mainPage.png';
+        
+        // Create prominent hexagon immediately
+        const prominentContainer = document.getElementById("prominent-hexagon-container");
+        const prominentData = {{
+          imageUrl: 'output/mainPage.png',
+          linkUrl: 'output/main_slam_book.html', 
+          title: "Sumukh's 40th Birthday",
+          isProminent: true
+        }};
+        prominentContainer.appendChild(createHexagon(prominentData));
+        
+        // Trigger confetti blast on page load (after main hexagon is created)
+        setTimeout(createConfetti, 500);
+
+        const allHexagonsData = [
+{js_array}
+        ];
+
+        // --- Logic to build the hive ---
+
+        // Get only the regular hexagon data (prominent already created above)
+        const gridData = allHexagonsData.filter((hex) => !hex.isProminent);
+        const gridContainer = document.getElementById("hive-grid-container");
+
+        // 3. Create and append the rest of the hive grid
+        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 3]; // Layout for the main grid ({len(hexagon_data)-1} hexagons total)
+        let dataIndex = 0;
+
+        rowLayout.forEach((hexCount) => {{
+          const row = document.createElement("div");
+          row.classList.add("hive-row");
+          for (let i = 0; i < hexCount; i++) {{
+            if (dataIndex >= gridData.length) break;
+            row.appendChild(createHexagon(gridData[dataIndex]));
+            dataIndex++;
+          }}
+          gridContainer.appendChild(row);
+        }});
 
         // Create more floating particles dynamically
         function createParticles() {{
