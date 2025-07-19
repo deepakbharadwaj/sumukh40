@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hexagon Template</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .hexagon {
+        width: 300px;
+        height: 260px;
+        background-color: #e8f4f8; /* Light blue background - easily customizable */
+        position: relative;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .emoji-section {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+        line-height: 1;
+      }
+
+      .text-section {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        line-height: 1.4;
+        word-wrap: break-word;
+        max-width: 80%;
+      }
+
+      .subtitle {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 8px;
+        font-weight: 400;
+      }
+
+      /* Customizable background color classes (more visible colors) */
+      .bg-light-blue {
+        background-color: #e8f4f8;
+      }
+      .bg-light-pink {
+        background-color: #fce4ec;
+      }
+      .bg-light-green {
+        background-color: #e8f5e8;
+      }
+      .bg-light-yellow {
+        background-color: #fff3a0;
+      }
+      .bg-light-purple {
+        background-color: #f3e5f5;
+      }
+      .bg-light-orange {
+        background-color: #ffebb3;
+      }
+      .bg-light-gray {
+        background-color: #e6e6e6;
+      }
+      .bg-alice-blue {
+        background-color: #f0f8ff;
+      }
+      .bg-mint {
+        background-color: #e0f2f1;
+      }
+      .bg-cream {
+        background-color: #f5e6d3;
+      }
+      .bg-lavender {
+        background-color: #f0e6ff;
+      }
+      .bg-rose {
+        background-color: #ffe4e6;
+      }
+      .bg-mint-green {
+        background-color: #d4f4dd;
+      }
+      .bg-peach {
+        background-color: #ffe0cc;
+      }
+      .bg-very-light-blue {
+        background-color: #e6f3ff;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .hexagon {
+          width: 250px;
+          height: 216px;
+        }
+
+        .emoji-section {
+          font-size: 2.5rem;
+        }
+
+        .text-section {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hexagon bg-light-blue">
+      <div class="emoji-section">🎉</div>
+      <div class="text-section">
+        Sample Text
+        <div class="subtitle">Subtitle here</div>
+      </div>
+    </div>
+  </body>
+</html>
