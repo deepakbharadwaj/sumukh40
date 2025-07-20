@@ -530,7 +530,7 @@ def create_main_slam_book_page(people_data, output_dir):
       <div class="text-center mb-16">
         <div class="cover-image inline-block">
           <img
-            src="mainPage.png"
+            src="mainPage.webp"
             alt="Slam Book Cover"
             class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl shadow-2xl object-cover lazy-image"
             loading="lazy"
@@ -548,8 +548,8 @@ def create_main_slam_book_page(people_data, output_dir):
         safe_name = re.sub(r'[^\w\s-]', '', name).strip()
         safe_name = re.sub(r'[-\s]+', '_', safe_name)
         
-        # Get photo filename if it exists
-        photo_filename = f"photo_{i:02d}_{safe_name}.jpg"
+        # Get photo filename if it exists (prioritize WebP format)
+        photo_filename = f"photo_{i:02d}_{safe_name}.webp"
         photo_path = os.path.join(output_dir, photo_filename)
         photo_src = photo_filename if os.path.exists(photo_path) else "https://placehold.co/200x200/fcd34d/78350f?text=Photo"
         
@@ -734,15 +734,15 @@ def main():
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
     
-    # Check if mainPage.png exists
-    main_page_image = "mainPage.png"
+    # Check if mainPage.webp exists
+    main_page_image = "mainPage.webp"
     if not os.path.exists(main_page_image):
         print(f"❌ Error: Could not find {main_page_image}")
         return
     
-    # Copy mainPage.png to output directory
+    # Copy mainPage.webp to output directory
     import shutil
-    output_image_path = os.path.join(output_dir, "mainPage.png")
+    output_image_path = os.path.join(output_dir, "mainPage.webp")
     shutil.copy2(main_page_image, output_image_path)
     print(f"✅ Copied {main_page_image} to output directory")
     
@@ -773,7 +773,7 @@ def main():
         
         print(f"\n✅ Successfully generated optimized main slam book page!")
         print(f"📁 Main page saved as: main_slam_book.html")
-        print(f"📸 Cover image: mainPage.png")
+        print(f"📸 Cover image: mainPage.webp")
         print(f"👥 Total entries: {len(people_data)}")
         
         print(f"\n🚀 Performance optimizations applied:")

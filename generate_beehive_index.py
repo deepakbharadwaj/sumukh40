@@ -34,7 +34,7 @@ def scan_slam_book_entries():
     slam_pages.sort()  # Sort to maintain order
     
     # Fallback image for entries without photos
-    fallback_image = 'output/mainPage.png'
+    fallback_image = 'output/mainPage.webp'
     
     for slam_page in slam_pages:
         filename = os.path.basename(slam_page)
@@ -84,7 +84,7 @@ def generate_hexagon_data(entries):
     
     # Add prominent hexagon first (main slam book)
     main_entry = {
-        'imageUrl': 'output/mainPage.png',
+        'imageUrl': 'output/mainPage.webp',
         'linkUrl': 'output/main_slam_book.html',
         'title': "Sumukh's 40th Birthday",
         'isProminent': True
@@ -135,7 +135,7 @@ def generate_beehive_html(hexagon_data):
     <title>🐝 Happy 40th Birthday Sumukh! 🐝</title>
     
     <!-- Critical resource preloading -->
-    <link rel="preload" href="output/mainPage.png" as="image" />
+    <link rel="preload" href="output/mainPage.webp" as="image" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     
     <!-- Performance hints -->
@@ -794,7 +794,7 @@ def generate_beehive_html(hexagon_data):
               
               imageLoader.onerror = () => {{
                 // Fallback to placeholder or error image
-                img.src = 'output/mainPage.png';
+                img.src = 'output/mainPage.webp';
                 hexagon.classList.remove('loading');
                 hexagon.classList.add('loaded');
                 observer.unobserve(hexagon);
@@ -843,7 +843,7 @@ def generate_beehive_html(hexagon_data):
         // Priority loading: Create prominent hexagon immediately
         const prominentContainer = document.getElementById("prominent-hexagon-container");
         const prominentData = {{
-          imageUrl: 'output/mainPage.png',
+          imageUrl: 'output/mainPage.webp',
           linkUrl: 'output/main_slam_book.html', 
           title: "Sumukh's 40th Birthday",
           isProminent: true
@@ -961,10 +961,10 @@ def main():
     
     print(f"✅ Found {len(entries)} slam book entries")
     
-    # Check if mainPage.png exists
-    main_page_path = os.path.join('output', 'mainPage.png')
+    # Check if mainPage.webp exists
+    main_page_path = os.path.join('output', 'mainPage.webp')
     if not os.path.exists(main_page_path):
-        print("⚠️  Warning: mainPage.png not found in output folder")
+        print("⚠️  Warning: mainPage.webp not found in output folder")
     
     # Check if main_slam_book.html exists
     main_html_path = os.path.join('output', 'main_slam_book.html')

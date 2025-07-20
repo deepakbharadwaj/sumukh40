@@ -6,7 +6,7 @@
     <title>🐝 Happy 40th Birthday Sumukh! 🐝</title>
     
     <!-- Critical resource preloading -->
-    <link rel="preload" href="output/mainPage.png" as="image" />
+    <link rel="preload" href="output/mainPage.webp" as="image" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     
     <!-- Performance hints -->
@@ -665,7 +665,7 @@
               
               imageLoader.onerror = () => {
                 // Fallback to placeholder or error image
-                img.src = 'output/mainPage.png';
+                img.src = 'output/mainPage.webp';
                 hexagon.classList.remove('loading');
                 hexagon.classList.add('loaded');
                 observer.unobserve(hexagon);
@@ -714,7 +714,7 @@
         // Priority loading: Create prominent hexagon immediately
         const prominentContainer = document.getElementById("prominent-hexagon-container");
         const prominentData = {
-          imageUrl: 'output/mainPage.png',
+          imageUrl: 'output/mainPage.webp',
           linkUrl: 'output/main_slam_book.html', 
           title: "Sumukh's 40th Birthday",
           isProminent: true
@@ -725,7 +725,7 @@
 
         const allHexagonsData = [
           // The prominent hexagon (main slam book)
-          { imageUrl: "output/mainPage.png", linkUrl: "output/main_slam_book.html", title: "Sumukh's 40th Birthday", isProminent: true },
+          { imageUrl: "output/mainPage.webp", linkUrl: "output/main_slam_book.html", title: "Sumukh's 40th Birthday", isProminent: true },
           
           // The rest of the slam book entries
           { imageUrl: "output/photo_01_Aadi.webp", linkUrl: "output/slam_page_01_Aadi.html", title: "Aadi" },
@@ -866,6 +866,6 @@
       });
     </script>
     
-    <!-- Generated on 2025-07-20 21:41:05 with performance optimizations -->
+    <!-- Generated on 2025-07-20 21:57:36 with performance optimizations -->
   </body>
 </html>
