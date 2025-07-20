@@ -47,6 +47,7 @@ def scan_slam_book_entries():
             
             # Look for corresponding photo
             photo_patterns = [
+                f'photo_{number}_{name_part}.webp',
                 f'photo_{number}_{name_part}.jpg',
                 f'photo_{number}_{name_part}.jpeg',
                 f'photo_{number}_{name_part}.png'

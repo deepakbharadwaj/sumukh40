@@ -97,7 +97,7 @@ def download_google_drive_image(drive_url, output_dir, person_name, page_num):
     # Create safe filename
     safe_name = re.sub(r'[^\w\s-]', '', person_name).strip()
     safe_name = re.sub(r'[-\s]+', '_', safe_name)
-    image_filename = f"photo_{page_num:02d}_{safe_name}.jpg"
+    image_filename = f"photo_{page_num:02d}_{safe_name}.webp"
     image_path = os.path.join(output_dir, image_filename)
     
     # Check if image already exists
