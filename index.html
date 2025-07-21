@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🐝 Happy 40th Birthday Sumukh! 🐝</title>
-    
+
     <!-- Critical resource preloading -->
     <link rel="preload" href="output/mainPage.webp" as="image" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    
+
     <!-- Performance hints -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#8b5cf6" />
-    
+
     <style>
       :root {
         /* -- Color Palette -- */
@@ -33,10 +33,10 @@
       * {
         box-sizing: border-box;
       }
-      
+
       body {
         margin: 0;
-        font-family: 'Arial', sans-serif;
+        font-family: "Arial", sans-serif;
         background: linear-gradient(
           135deg,
           rgba(71, 85, 105, 1) 0%,
@@ -78,8 +78,13 @@
       }
 
       @keyframes patternMove {
-        0%, 100% { background-position: 0% 0%, 100% 100%; }
-        50% { background-position: 30% 30%, 70% 70%; }
+        0%,
+        100% {
+          background-position: 0% 0%, 100% 100%;
+        }
+        50% {
+          background-position: 30% 30%, 70% 70%;
+        }
       }
 
       /* --- Reduced Floating Particles for performance --- */
@@ -102,8 +107,15 @@
       }
 
       @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-        50% { transform: translateY(-15px) rotate(180deg); opacity: 0.8; }
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateY(-15px) rotate(180deg);
+          opacity: 0.8;
+        }
       }
 
       /* --- Diwali Rocket Crackers Styles --- */
@@ -128,7 +140,7 @@
       }
 
       .rocket::before {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -10px;
         left: 50%;
@@ -141,24 +153,33 @@
       }
 
       @keyframes rocketLaunch {
-        0% { 
-          transform: translateY(0px) scale(1); 
+        0% {
+          transform: translateY(0px) scale(1);
           opacity: 1;
         }
-        70% { 
-          transform: translateY(-70vh) scale(1.2); 
+        70% {
+          transform: translateY(-70vh) scale(1.2);
           opacity: 1;
         }
-        100% { 
-          transform: translateY(-80vh) scale(0); 
+        100% {
+          transform: translateY(-80vh) scale(0);
           opacity: 0;
         }
       }
 
       @keyframes rocketTrail {
-        0% { opacity: 0.8; height: 10px; }
-        50% { opacity: 1; height: 30px; }
-        100% { opacity: 0; height: 5px; }
+        0% {
+          opacity: 0.8;
+          height: 10px;
+        }
+        50% {
+          opacity: 1;
+          height: 30px;
+        }
+        100% {
+          opacity: 0;
+          height: 5px;
+        }
       }
 
       .explosion {
@@ -170,13 +191,27 @@
         will-change: transform;
       }
 
-      .explosion.gold { background: radial-gradient(circle, #ffd700, #ffb347); }
-      .explosion.red { background: radial-gradient(circle, #ff6b6b, #ff4757); }
-      .explosion.green { background: radial-gradient(circle, #7bed9f, #2ed573); }
-      .explosion.blue { background: radial-gradient(circle, #70a1ff, #5352ed); }
-      .explosion.pink { background: radial-gradient(circle, #ff9ff3, #f368e0); }
-      .explosion.orange { background: radial-gradient(circle, #ffa502, #ff6348); }
-      .explosion.purple { background: radial-gradient(circle, #cd84f1, #a55eea); }
+      .explosion.gold {
+        background: radial-gradient(circle, #ffd700, #ffb347);
+      }
+      .explosion.red {
+        background: radial-gradient(circle, #ff6b6b, #ff4757);
+      }
+      .explosion.green {
+        background: radial-gradient(circle, #7bed9f, #2ed573);
+      }
+      .explosion.blue {
+        background: radial-gradient(circle, #70a1ff, #5352ed);
+      }
+      .explosion.pink {
+        background: radial-gradient(circle, #ff9ff3, #f368e0);
+      }
+      .explosion.orange {
+        background: radial-gradient(circle, #ffa502, #ff6348);
+      }
+      .explosion.purple {
+        background: radial-gradient(circle, #cd84f1, #a55eea);
+      }
 
       @keyframes explode {
         0% {
@@ -184,7 +219,8 @@
           opacity: 1;
         }
         20% {
-          transform: scale(1.5) translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) rotate(180deg);
+          transform: scale(1.5) translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3))
+            rotate(180deg);
           opacity: 1;
         }
         100% {
@@ -210,7 +246,8 @@
           box-shadow: 0 0 6px #fff;
         }
         50% {
-          transform: scale(1.2) translate(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7)) rotate(180deg);
+          transform: scale(1.2) translate(calc(var(--dx) * 0.7), calc(var(--dy) * 0.7))
+            rotate(180deg);
           opacity: 1;
           box-shadow: 0 0 12px #fff;
         }
@@ -275,12 +312,21 @@
       }
 
       @keyframes pulseHint {
-        0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-        50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+        0%,
+        100% {
+          opacity: 0.7;
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.05);
+        }
       }
 
       @media (max-width: 768px) {
-        .scroll-hint { display: block; }
+        .scroll-hint {
+          display: block;
+        }
       }
 
       .beehive {
@@ -293,7 +339,8 @@
 
       /* --- Optimized pulse glow effect --- */
       @keyframes pulse-glow {
-        0%, 100% {
+        0%,
+        100% {
           box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), 0 10px 30px rgba(139, 92, 246, 0.3);
         }
         50% {
@@ -319,9 +366,7 @@
         animation: pulse-glow 3s infinite ease-in-out;
         border: none !important;
         background: linear-gradient(135deg, #6366f1, #4f46e5, #3730a3);
-        box-shadow: 
-          0 15px 35px rgba(0, 0, 0, 0.4),
-          0 0 40px rgba(139, 92, 246, 0.6),
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 92, 246, 0.6),
           0 0 0 4px #5b21b6;
         will-change: box-shadow;
       }
@@ -349,7 +394,9 @@
         margin-top: calc(var(--hex-size) * -0.134);
       }
 
-      .hive-row:first-child { margin-top: 0; }
+      .hive-row:first-child {
+        margin-top: 0;
+      }
 
       /* --- Optimized Hexagon Styles --- */
       .hexagon {
@@ -373,9 +420,7 @@
         transition: all 0.2s ease;
         overflow: hidden;
         border: none;
-        box-shadow: 
-          0 8px 16px rgba(0, 0, 0, 0.3),
-          0 0 0 2px #3a4556;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 0 2px #3a4556;
         will-change: transform, box-shadow;
       }
 
@@ -396,8 +441,13 @@
       }
 
       @keyframes shimmer {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
       }
 
       .hexagon.loading img {
@@ -413,9 +463,7 @@
       .hexagon a:hover,
       .hexagon a:focus {
         transform: scale(1.05);
-        box-shadow: 
-          0 12px 24px rgba(0, 0, 0, 0.4),
-          0 0 20px rgba(139, 92, 246, 0.3);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(139, 92, 246, 0.3);
       }
 
       .hexagon a:hover img,
@@ -429,14 +477,26 @@
           --hex-size: 18vw;
           --prominent-hex-size: 45vw;
         }
-        
-        body { padding: 10px; }
-        #hive-wrapper { padding: 2rem 0.5rem; width: max-content; min-width: 100vw; }
-        
+
+        body {
+          padding: 10px;
+        }
+        #hive-wrapper {
+          padding: 2rem 0.5rem;
+          width: max-content;
+          min-width: 100vw;
+        }
+
         /* Disable heavy effects on mobile */
-        .hexagon a:hover { transform: scale(1.02); }
-        .particle { animation-duration: 10s; }
-        body::before { animation: none; }
+        .hexagon a:hover {
+          transform: scale(1.02);
+        }
+        .particle {
+          animation-duration: 10s;
+        }
+        body::before {
+          animation: none;
+        }
       }
 
       @media (max-width: 480px) {
@@ -444,9 +504,13 @@
           --hex-size: 22vw;
           --prominent-hex-size: 50vw;
         }
-        
-        #hive-wrapper { min-width: 120vw; }
-        .beehive { transform: scale(0.9); }
+
+        #hive-wrapper {
+          min-width: 120vw;
+        }
+        .beehive {
+          transform: scale(0.9);
+        }
       }
 
       /* --- Optimized appearance animations --- */
@@ -462,23 +526,49 @@
       }
 
       @keyframes hexAppear {
-        0% { opacity: 0; transform: scale(0.8) translateY(20px); }
-        100% { opacity: 1; transform: scale(1) translateY(0); }
+        0% {
+          opacity: 0;
+          transform: scale(0.8) translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
       }
 
       @keyframes hexAppearFast {
-        0% { opacity: 0; transform: scale(0.9); }
-        100% { opacity: 1; transform: scale(1); }
+        0% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
       /* Staggered animation delays */
-      .hexagon:nth-child(1) { animation-delay: 0.1s; }
-      .hexagon:nth-child(2) { animation-delay: 0.15s; }
-      .hexagon:nth-child(3) { animation-delay: 0.2s; }
-      .hexagon:nth-child(4) { animation-delay: 0.25s; }
-      .hexagon:nth-child(5) { animation-delay: 0.3s; }
-      .hexagon:nth-child(6) { animation-delay: 0.35s; }
-      .hexagon:nth-child(7) { animation-delay: 0.4s; }
+      .hexagon:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .hexagon:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .hexagon:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .hexagon:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      .hexagon:nth-child(5) {
+        animation-delay: 0.3s;
+      }
+      .hexagon:nth-child(6) {
+        animation-delay: 0.35s;
+      }
+      .hexagon:nth-child(7) {
+        animation-delay: 0.4s;
+      }
 
       /* --- Loading indicator --- */
       .page-loader {
@@ -504,8 +594,13 @@
       }
 
       @keyframes loaderSpin {
-        0%, 100% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.1); }
+        0%,
+        100% {
+          transform: rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.1);
+        }
       }
 
       .page-loader.hidden {
@@ -524,10 +619,22 @@
 
     <!-- Reduced floating particles for better performance -->
     <div class="floating-particles">
-      <div class="particle" style="width: 6px; height: 6px; left: 15%; top: 25%; animation-delay: 0s;"></div>
-      <div class="particle" style="width: 4px; height: 4px; left: 85%; top: 75%; animation-delay: 2s;"></div>
-      <div class="particle" style="width: 5px; height: 5px; left: 50%; top: 10%; animation-delay: 4s;"></div>
-      <div class="particle" style="width: 7px; height: 7px; left: 20%; top: 80%; animation-delay: 6s;"></div>
+      <div
+        class="particle"
+        style="width: 6px; height: 6px; left: 15%; top: 25%; animation-delay: 0s"
+      ></div>
+      <div
+        class="particle"
+        style="width: 4px; height: 4px; left: 85%; top: 75%; animation-delay: 2s"
+      ></div>
+      <div
+        class="particle"
+        style="width: 5px; height: 5px; left: 50%; top: 10%; animation-delay: 4s"
+      ></div>
+      <div
+        class="particle"
+        style="width: 7px; height: 7px; left: 20%; top: 80%; animation-delay: 6s"
+      ></div>
     </div>
 
     <main id="hive-wrapper">
@@ -543,71 +650,70 @@
     <script>
       // Diwali Rocket Crackers Effect
       function createRocketCrackers() {
-        const container = document.getElementById('crackers-container');
-        const explosionColors = ['gold', 'red', 'green', 'blue', 'pink', 'orange', 'purple'];
-        
+        const container = document.getElementById("crackers-container");
+        const explosionColors = ["gold", "red", "green", "blue", "pink", "orange", "purple"];
+
         // Create 8-12 rockets launching at different times
         const rocketCount = 8 + Math.floor(Math.random() * 5);
-        
+
         for (let i = 0; i < rocketCount; i++) {
           setTimeout(() => {
             // Create rocket
-            const rocket = document.createElement('div');
-            rocket.className = 'rocket';
-            rocket.style.left = (15 + Math.random() * 70) + 'vw'; // Launch from different positions
-            rocket.style.bottom = '-50px'; // Start from bottom
-            
+            const rocket = document.createElement("div");
+            rocket.className = "rocket";
+            rocket.style.left = 15 + Math.random() * 70 + "vw"; // Launch from different positions
+            rocket.style.bottom = "-50px"; // Start from bottom
+
             container.appendChild(rocket);
-            
+
             // Create explosion after rocket reaches peak (1.4s)
             setTimeout(() => {
               createExplosion(
-                rocket.style.left, 
-                20 + Math.random() * 30 + 'vh', // Explosion height
+                rocket.style.left,
+                20 + Math.random() * 30 + "vh", // Explosion height
                 explosionColors[Math.floor(Math.random() * explosionColors.length)],
                 container
               );
-              
+
               // Remove rocket
               if (rocket.parentNode) {
                 rocket.parentNode.removeChild(rocket);
               }
             }, 1400);
-            
           }, i * (200 + Math.random() * 300)); // Stagger rocket launches
         }
-        
+
         // Clean up container after all effects
         setTimeout(() => {
-          container.style.display = 'none';
+          container.style.display = "none";
         }, 8000);
       }
 
       // Create explosion effect
       function createExplosion(x, y, color, container) {
         const particleCount = 20 + Math.floor(Math.random() * 15);
-        
+
         for (let i = 0; i < particleCount; i++) {
           // Create explosion particles
-          const particle = document.createElement('div');
+          const particle = document.createElement("div");
           particle.className = `explosion ${color}`;
-          
+
           const angle = (Math.PI * 2 * i) / particleCount;
           const distance = 50 + Math.random() * 100;
           const particleX = Math.cos(angle) * distance;
           const particleY = Math.sin(angle) * distance;
-          
+
           particle.style.left = x;
           particle.style.bottom = y;
-          particle.style.setProperty('--dx', particleX + 'px');
-          particle.style.setProperty('--dy', particleY + 'px');
-          
+          particle.style.setProperty("--dx", particleX + "px");
+          particle.style.setProperty("--dy", particleY + "px");
+
           // Random animation delay and duration
-          particle.style.animationDelay = Math.random() * 0.3 + 's';
-          particle.style.animationDuration = (1 + Math.random() * 0.8) + 's';
-          
+          particle.style.animationDelay = Math.random() * 0.3 + "s";
+          particle.style.animationDuration = 1 + Math.random() * 0.8 + "s";
+
           container.appendChild(particle);
-          
+
           // Clean up particle
           setTimeout(() => {
             if (particle.parentNode) {
@@ -615,25 +721,25 @@
             }
           }, 2500);
         }
-        
+
         // Add sparkles around explosion
         for (let i = 0; i < 8; i++) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
           sparkle.style.left = x;
           sparkle.style.bottom = y;
-          
+
           const sparkleAngle = (Math.PI * 2 * i) / 8;
           const sparkleDistance = 30 + Math.random() * 80;
           const sparkleX = Math.cos(sparkleAngle) * sparkleDistance;
           const sparkleY = Math.sin(sparkleAngle) * sparkleDistance;
-          
-          sparkle.style.setProperty('--dx', sparkleX + 'px');
-          sparkle.style.setProperty('--dy', sparkleY + 'px');
-          sparkle.style.animationDelay = Math.random() * 0.5 + 's';
-          
+
+          sparkle.style.setProperty("--dx", sparkleX + "px");
+          sparkle.style.setProperty("--dy", sparkleY + "px");
+          sparkle.style.animationDelay = Math.random() * 0.5 + "s";
+
           container.appendChild(sparkle);
-          
+
           // Clean up sparkle
           setTimeout(() => {
             if (sparkle.parentNode) {
@@ -644,45 +750,48 @@
       }
 
       // Intersection Observer for lazy loading
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const hexagon = entry.target;
-            const img = hexagon.querySelector('img');
-            
-            if (img && img.dataset.src) {
-              // Start loading the image
-              hexagon.classList.add('loading');
-              
-              const imageLoader = new Image();
-              imageLoader.onload = () => {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                hexagon.classList.remove('loading');
-                hexagon.classList.add('loaded');
-                observer.unobserve(hexagon);
-              };
-              
-              imageLoader.onerror = () => {
-                // Fallback to placeholder or error image
-                img.src = 'output/mainPage.webp';
-                hexagon.classList.remove('loading');
-                hexagon.classList.add('loaded');
-                observer.unobserve(hexagon);
-              };
-              
-              imageLoader.src = img.dataset.src;
+      const imageObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const hexagon = entry.target;
+              const img = hexagon.querySelector("img");
+
+              if (img && img.dataset.src) {
+                // Start loading the image
+                hexagon.classList.add("loading");
+
+                const imageLoader = new Image();
+                imageLoader.onload = () => {
+                  img.src = img.dataset.src;
+                  img.removeAttribute("data-src");
+                  hexagon.classList.remove("loading");
+                  hexagon.classList.add("loaded");
+                  observer.unobserve(hexagon);
+                };
+
+                imageLoader.onerror = () => {
+                  // Fallback to placeholder or error image
+                  img.src = "output/mainPage.webp";
+                  hexagon.classList.remove("loading");
+                  hexagon.classList.add("loaded");
+                  observer.unobserve(hexagon);
+                };
+
+                imageLoader.src = img.dataset.src;
+              }
             }
-          }
-        });
-      }, {
-        rootMargin: '100px', // Start loading 100px before entering viewport
-        threshold: 0.1
-      });
+          });
+        },
+        {
+          rootMargin: "100px", // Start loading 100px before entering viewport
+          threshold: 0.1,
+        }
+      );
 
       document.addEventListener("DOMContentLoaded", () => {
-        const pageLoader = document.getElementById('page-loader');
-        
+        const pageLoader = document.getElementById("page-loader");
+
         // Helper function to create a single hexagon element with lazy loading
         function createHexagon(hexData, isProminent = false) {
           const hexagon = document.createElement("div");
@@ -691,19 +800,20 @@
           const link = document.createElement("a");
           link.href = hexData.linkUrl;
           link.title = hexData.title;
-          link.setAttribute('tabindex', '0');
+          link.setAttribute("tabindex", "0");
 
           const image = document.createElement("img");
           image.alt = hexData.title;
-          
+
           // Implement lazy loading for non-prominent images
           if (isProminent) {
             image.src = hexData.imageUrl;
-            hexagon.classList.add('loaded');
+            hexagon.classList.add("loaded");
           } else {
             image.dataset.src = hexData.imageUrl;
-            image.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzY0NzQ4YiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD48L3N2Zz4='; // Base64 placeholder
-            hexagon.classList.add('loading');
+            image.src =
+              "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzY0NzQ4YiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TG9hZGluZy4uLjwvdGV4dD48L3N2Zz4="; // Base64 placeholder
+            hexagon.classList.add("loading");
           }
 
           link.appendChild(image);
@@ -714,131 +824,349 @@
         // Priority loading: Create prominent hexagon immediately
         const prominentContainer = document.getElementById("prominent-hexagon-container");
         const prominentData = {
-          imageUrl: 'output/mainPage.webp',
-          linkUrl: 'output/main_slam_book.html', 
+          imageUrl: "output/mainPage.webp",
+          linkUrl: "output/main_slam_book.html",
           title: "Sumukh's 40th Birthday",
-          isProminent: true
+          isProminent: true,
         };
-        
+
         const prominentHex = createHexagon(prominentData, true);
         prominentContainer.appendChild(prominentHex);
 
         const allHexagonsData = [
           // The prominent hexagon (main slam book)
-          { imageUrl: "output/mainPage.webp", linkUrl: "output/main_slam_book.html", title: "Sumukh's 40th Birthday", isProminent: true },
-          
+          {
+            imageUrl: "output/mainPage.webp",
+            linkUrl: "output/main_slam_book.html",
+            title: "Sumukh's 40th Birthday",
+            isProminent: true,
+          },
+
           // The rest of the slam book entries
-          { imageUrl: "output/photo_01_Aadi.webp", linkUrl: "output/slam_page_01_Aadi.html", title: "Aadi" },
-          { imageUrl: "output/photo_02_Abhi.webp", linkUrl: "output/slam_page_02_Abhi.html", title: "Abhi" },
-          { imageUrl: "output/photo_03_Adi.webp", linkUrl: "output/slam_page_03_Adi.html", title: "Adi" },
-          { imageUrl: "output/photo_04_Adithi_Anitha_and_Lohith.webp", linkUrl: "output/slam_page_04_Adithi_Anitha_and_Lohith.html", title: "Adithi Anitha and Lohith" },
-          { imageUrl: "output/photo_05_Anand.webp", linkUrl: "output/slam_page_05_Anand.html", title: "Anand" },
-          { imageUrl: "output/photo_06_ANANTH_AVADHANI.webp", linkUrl: "output/slam_page_06_ANANTH_AVADHANI.html", title: "ANANTH AVADHANI" },
-          { imageUrl: "output/photo_07_Anu_M_Kumar.webp", linkUrl: "output/slam_page_07_Anu_M_Kumar.html", title: "Anu M Kumar" },
-          { imageUrl: "output/photo_08_Aravind_Chakravarthy.webp", linkUrl: "output/slam_page_08_Aravind_Chakravarthy.html", title: "Aravind Chakravarthy" },
-          { imageUrl: "output/photo_09_Arjun_Narayan.webp", linkUrl: "output/slam_page_09_Arjun_Narayan.html", title: "Arjun Narayan" },
-          { imageUrl: "output/photo_10_Avik.webp", linkUrl: "output/slam_page_10_Avik.html", title: "Avik" },
-          { imageUrl: "output/photo_11_Baebude.webp", linkUrl: "output/slam_page_11_Baebude.html", title: "Baebude" },
-          { imageUrl: "output/photo_12_Chaithra.webp", linkUrl: "output/slam_page_12_Chaithra.html", title: "Chaithra" },
-          { imageUrl: "output/photo_13_Deepa_and_Keshav.webp", linkUrl: "output/slam_page_13_Deepa_and_Keshav.html", title: "Deepa and Keshav" },
-          { imageUrl: "output/photo_14_Deepak_Bharadwaj.webp", linkUrl: "output/slam_page_14_Deepak_Bharadwaj.html", title: "Deepak Bharadwaj" },
-          { imageUrl: "output/photo_15_Deepashree.webp", linkUrl: "output/slam_page_15_Deepashree.html", title: "Deepashree" },
-          { imageUrl: "output/photo_16_Deepika.webp", linkUrl: "output/slam_page_16_Deepika.html", title: "Deepika" },
-          { imageUrl: "output/photo_17_Divya.webp", linkUrl: "output/slam_page_17_Divya.html", title: "Divya" },
-          { imageUrl: "output/photo_18_Divya_Arjun.webp", linkUrl: "output/slam_page_18_Divya_Arjun.html", title: "Divya Arjun" },
-          { imageUrl: "output/photo_19_Janani_Krishnamurthy.webp", linkUrl: "output/slam_page_19_Janani_Krishnamurthy.html", title: "Janani Krishnamurthy" },
-          { imageUrl: "output/photo_20_Kathyayani_Prasad.webp", linkUrl: "output/slam_page_20_Kathyayani_Prasad.html", title: "Kathyayani Prasad" },
-          { imageUrl: "output/photo_21_Kaushik.webp", linkUrl: "output/slam_page_21_Kaushik.html", title: "Kaushik" },
-          { imageUrl: "output/photo_22_Keshav.webp", linkUrl: "output/slam_page_22_Keshav.html", title: "Keshav" },
-          { imageUrl: "output/photo_23_Khoa_Le.webp", linkUrl: "output/slam_page_23_Khoa_Le.html", title: "Khoa Le" },
-          { imageUrl: "output/photo_24_Krupa_Ramachandran.webp", linkUrl: "output/slam_page_24_Krupa_Ramachandran.html", title: "Krupa Ramachandran" },
-          { imageUrl: "output/photo_25_Lakshmi.webp", linkUrl: "output/slam_page_25_Lakshmi.html", title: "Lakshmi" },
-          { imageUrl: "output/photo_26_Munni.webp", linkUrl: "output/slam_page_26_Munni.html", title: "Munni" },
-          { imageUrl: "output/photo_27_Nagesh.webp", linkUrl: "output/slam_page_27_Nagesh.html", title: "Nagesh" },
-          { imageUrl: "output/photo_28_Nithya.webp", linkUrl: "output/slam_page_28_Nithya.html", title: "Nithya" },
-          { imageUrl: "output/photo_29_Pannaga.webp", linkUrl: "output/slam_page_29_Pannaga.html", title: "Pannaga" },
-          { imageUrl: "output/photo_30_Pannaga_S_S.webp", linkUrl: "output/slam_page_30_Pannaga_S_S.html", title: "Pannaga S S" },
-          { imageUrl: "output/photo_31_Prashant.webp", linkUrl: "output/slam_page_31_Prashant.html", title: "Prashant" },
-          { imageUrl: "output/photo_32_Praveen_Narayanan.webp", linkUrl: "output/slam_page_32_Praveen_Narayanan.html", title: "Praveen Narayanan" },
-          { imageUrl: "output/photo_33_Rahul.webp", linkUrl: "output/slam_page_33_Rahul.html", title: "Rahul" },
-          { imageUrl: "output/photo_34_Rakesh_Ramakrishna.webp", linkUrl: "output/slam_page_34_Rakesh_Ramakrishna.html", title: "Rakesh Ramakrishna" },
-          { imageUrl: "output/photo_35_Rashmi_Avadhani.webp", linkUrl: "output/slam_page_35_Rashmi_Avadhani.html", title: "Rashmi Avadhani" },
-          { imageUrl: "output/photo_36_RAVI_VEENA.webp", linkUrl: "output/slam_page_36_RAVI_VEENA.html", title: "RAVI VEENA" },
-          { imageUrl: "output/photo_37_Samartha_A_Kumar.webp", linkUrl: "output/slam_page_37_Samartha_A_Kumar.html", title: "Samartha A Kumar" },
-          { imageUrl: "output/photo_38_Sandeep.webp", linkUrl: "output/slam_page_38_Sandeep.html", title: "Sandeep" },
-          { imageUrl: "output/photo_39_Santosh_Bharadwaj.webp", linkUrl: "output/slam_page_39_Santosh_Bharadwaj.html", title: "Santosh Bharadwaj" },
-          { imageUrl: "output/photo_40_Shashank_Shastry.webp", linkUrl: "output/slam_page_40_Shashank_Shastry.html", title: "Shashank Shastry" },
-          { imageUrl: "output/photo_41_Shwetha.webp", linkUrl: "output/slam_page_41_Shwetha.html", title: "Shwetha" },
-          { imageUrl: "output/photo_42_Sindhoor.webp", linkUrl: "output/slam_page_42_Sindhoor.html", title: "Sindhoor" },
-          { imageUrl: "output/photo_43_Sindhu_Bharadwaj_Bangalore_Kumar.webp", linkUrl: "output/slam_page_43_Sindhu_Bharadwaj_Bangalore_Kumar.html", title: "Sindhu Bharadwaj Bangalore Kumar" },
-          { imageUrl: "output/photo_44_Skanda_A_Kumar.webp", linkUrl: "output/slam_page_44_Skanda_A_Kumar.html", title: "Skanda A Kumar" },
-          { imageUrl: "output/photo_45_Smita.webp", linkUrl: "output/slam_page_45_Smita.html", title: "Smita" },
-          { imageUrl: "output/photo_46_Sriranjini_Shridhar.webp", linkUrl: "output/slam_page_46_Sriranjini_Shridhar.html", title: "Sriranjini Shridhar" },
-          { imageUrl: "output/photo_47_Sriranjini_CR.webp", linkUrl: "output/slam_page_47_Sriranjini_CR.html", title: "Sriranjini CR" },
-          { imageUrl: "output/photo_48_Swaroop_Subbanna.webp", linkUrl: "output/slam_page_48_Swaroop_Subbanna.html", title: "Swaroop Subbanna" },
-          { imageUrl: "output/photo_49_Vishruth_Sumukh_Avadhani.webp", linkUrl: "output/slam_page_49_Vishruth_Sumukh_Avadhani.html", title: "Vishruth Sumukh Avadhani" },
-          { imageUrl: "output/photo_50_Will_Hanschell.webp", linkUrl: "output/slam_page_50_Will_Hanschell.html", title: "Will Hanschell" },
-          { imageUrl: "output/photo_51_Meghana_and_Srikanth.webp", linkUrl: "output/slam_page_51_Meghana_and_Srikanth.html", title: "Meghana and Srikanth" }
+          {
+            imageUrl: "output/photo_01_Aadi.webp",
+            linkUrl: "output/slam_page_01_Aadi.html",
+            title: "Aadi",
+          },
+          {
+            imageUrl: "output/photo_02_Abhi.webp",
+            linkUrl: "output/slam_page_02_Abhi.html",
+            title: "Abhi",
+          },
+          {
+            imageUrl: "output/photo_03_Adi.webp",
+            linkUrl: "output/slam_page_03_Adi.html",
+            title: "Adi",
+          },
+          {
+            imageUrl: "output/photo_04_Adithi_Anitha_and_Lohith.webp",
+            linkUrl: "output/slam_page_04_Adithi_Anitha_and_Lohith.html",
+            title: "Adithi Anitha and Lohith",
+          },
+          {
+            imageUrl: "output/photo_05_Anand.webp",
+            linkUrl: "output/slam_page_05_Anand.html",
+            title: "Anand",
+          },
+          {
+            imageUrl: "output/photo_06_ANANTH_AVADHANI.webp",
+            linkUrl: "output/slam_page_06_ANANTH_AVADHANI.html",
+            title: "ANANTH AVADHANI",
+          },
+          {
+            imageUrl: "output/photo_07_Anu_M_Kumar.webp",
+            linkUrl: "output/slam_page_07_Anu_M_Kumar.html",
+            title: "Anu M Kumar",
+          },
+          {
+            imageUrl: "output/photo_08_Aravind_Chakravarthy.webp",
+            linkUrl: "output/slam_page_08_Aravind_Chakravarthy.html",
+            title: "Aravind Chakravarthy",
+          },
+          {
+            imageUrl: "output/photo_09_Arjun_Narayan.webp",
+            linkUrl: "output/slam_page_09_Arjun_Narayan.html",
+            title: "Arjun Narayan",
+          },
+          {
+            imageUrl: "output/photo_10_Avik.webp",
+            linkUrl: "output/slam_page_10_Avik.html",
+            title: "Avik",
+          },
+          {
+            imageUrl: "output/photo_11_Baebude.webp",
+            linkUrl: "output/slam_page_11_Baebude.html",
+            title: "Baebude",
+          },
+          {
+            imageUrl: "output/photo_12_Chaithra.webp",
+            linkUrl: "output/slam_page_12_Chaithra.html",
+            title: "Chaithra",
+          },
+          {
+            imageUrl: "output/photo_13_Deepa_and_Keshav.webp",
+            linkUrl: "output/slam_page_13_Deepa_and_Keshav.html",
+            title: "Deepa and Keshav",
+          },
+          {
+            imageUrl: "output/photo_14_Deepak_Bharadwaj.webp",
+            linkUrl: "output/slam_page_14_Deepak_Bharadwaj.html",
+            title: "Deepak Bharadwaj",
+          },
+          {
+            imageUrl: "output/photo_15_Deepashree.webp",
+            linkUrl: "output/slam_page_15_Deepashree.html",
+            title: "Deepashree",
+          },
+          {
+            imageUrl: "output/photo_16_Deepika.webp",
+            linkUrl: "output/slam_page_16_Deepika.html",
+            title: "Deepika",
+          },
+          {
+            imageUrl: "output/photo_17_Divya.webp",
+            linkUrl: "output/slam_page_17_Divya.html",
+            title: "Divya",
+          },
+          {
+            imageUrl: "output/photo_18_Divya_Arjun.webp",
+            linkUrl: "output/slam_page_18_Divya_Arjun.html",
+            title: "Divya Arjun",
+          },
+          {
+            imageUrl: "output/photo_19_Janani_Krishnamurthy.webp",
+            linkUrl: "output/slam_page_19_Janani_Krishnamurthy.html",
+            title: "Janani Krishnamurthy",
+          },
+          {
+            imageUrl: "output/photo_20_Kathyayani_Prasad.webp",
+            linkUrl: "output/slam_page_20_Kathyayani_Prasad.html",
+            title: "Kathyayani Prasad",
+          },
+          {
+            imageUrl: "output/photo_21_Kaushik.webp",
+            linkUrl: "output/slam_page_21_Kaushik.html",
+            title: "Kaushik",
+          },
+          {
+            imageUrl: "output/photo_22_Keshav.webp",
+            linkUrl: "output/slam_page_22_Keshav.html",
+            title: "Keshav",
+          },
+          {
+            imageUrl: "output/photo_23_Khoa_Le.webp",
+            linkUrl: "output/slam_page_23_Khoa_Le.html",
+            title: "Khoa Le",
+          },
+          {
+            imageUrl: "output/photo_24_Krupa_Ramachandran.webp",
+            linkUrl: "output/slam_page_24_Krupa_Ramachandran.html",
+            title: "Krupa Ramachandran",
+          },
+          {
+            imageUrl: "output/photo_25_Lakshmi.webp",
+            linkUrl: "output/slam_page_25_Lakshmi.html",
+            title: "Lakshmi",
+          },
+          {
+            imageUrl: "output/photo_26_Munni.webp",
+            linkUrl: "output/slam_page_26_Munni.html",
+            title: "Munni",
+          },
+          {
+            imageUrl: "output/photo_27_Nagesh.webp",
+            linkUrl: "output/slam_page_27_Nagesh.html",
+            title: "Nagesh",
+          },
+          {
+            imageUrl: "output/photo_28_Nithya.webp",
+            linkUrl: "output/slam_page_28_Nithya.html",
+            title: "Nithya",
+          },
+          {
+            imageUrl: "output/photo_29_Pannaga.webp",
+            linkUrl: "output/slam_page_29_Pannaga.html",
+            title: "Pannaga",
+          },
+          {
+            imageUrl: "output/photo_30_Pannaga_S_S.webp",
+            linkUrl: "output/slam_page_30_Pannaga_S_S.html",
+            title: "Pannaga S S",
+          },
+          {
+            imageUrl: "output/photo_31_Prashant.webp",
+            linkUrl: "output/slam_page_31_Prashant.html",
+            title: "Prashant",
+          },
+          {
+            imageUrl: "output/photo_32_Praveen_Narayanan.webp",
+            linkUrl: "output/slam_page_32_Praveen_Narayanan.html",
+            title: "Praveen Narayanan",
+          },
+          {
+            imageUrl: "output/photo_33_Rahul.webp",
+            linkUrl: "output/slam_page_33_Rahul.html",
+            title: "Rahul",
+          },
+          {
+            imageUrl: "output/photo_34_Rakesh_Ramakrishna.webp",
+            linkUrl: "output/slam_page_34_Rakesh_Ramakrishna.html",
+            title: "Rakesh Ramakrishna",
+          },
+          {
+            imageUrl: "output/photo_35_Rashmi_Avadhani.webp",
+            linkUrl: "output/slam_page_35_Rashmi_Avadhani.html",
+            title: "Rashmi Avadhani",
+          },
+          {
+            imageUrl: "output/photo_36_RAVI_VEENA.webp",
+            linkUrl: "output/slam_page_36_RAVI_VEENA.html",
+            title: "RAVI VEENA",
+          },
+          {
+            imageUrl: "output/photo_37_Samartha_A_Kumar.webp",
+            linkUrl: "output/slam_page_37_Samartha_A_Kumar.html",
+            title: "Samartha A Kumar",
+          },
+          {
+            imageUrl: "output/photo_38_Sandeep.webp",
+            linkUrl: "output/slam_page_38_Sandeep.html",
+            title: "Sandeep",
+          },
+          {
+            imageUrl: "output/photo_39_Santosh_Bharadwaj.webp",
+            linkUrl: "output/slam_page_39_Santosh_Bharadwaj.html",
+            title: "Santosh Bharadwaj",
+          },
+          {
+            imageUrl: "output/photo_40_Shashank_Shastry.webp",
+            linkUrl: "output/slam_page_40_Shashank_Shastry.html",
+            title: "Shashank Shastry",
+          },
+          {
+            imageUrl: "output/photo_41_Shwetha.webp",
+            linkUrl: "output/slam_page_41_Shwetha.html",
+            title: "Shwetha",
+          },
+          {
+            imageUrl: "output/photo_42_Sindhoor.webp",
+            linkUrl: "output/slam_page_42_Sindhoor.html",
+            title: "Sindhoor",
+          },
+          {
+            imageUrl: "output/photo_43_Sindhu_Bharadwaj_Bangalore_Kumar.webp",
+            linkUrl: "output/slam_page_43_Sindhu_Bharadwaj_Bangalore_Kumar.html",
+            title: "Sindhu Bharadwaj Bangalore Kumar",
+          },
+          {
+            imageUrl: "output/photo_44_Skanda_A_Kumar.webp",
+            linkUrl: "output/slam_page_44_Skanda_A_Kumar.html",
+            title: "Skanda A Kumar",
+          },
+          {
+            imageUrl: "output/photo_45_Smita.webp",
+            linkUrl: "output/slam_page_45_Smita.html",
+            title: "Smita",
+          },
+          {
+            imageUrl: "output/photo_46_Sriranjini_Shridhar.webp",
+            linkUrl: "output/slam_page_46_Sriranjini_Shridhar.html",
+            title: "Sriranjini Shridhar",
+          },
+          {
+            imageUrl: "output/photo_47_Sriranjini_CR.webp",
+            linkUrl: "output/slam_page_47_Sriranjini_CR.html",
+            title: "Sriranjini CR",
+          },
+          {
+            imageUrl: "output/photo_48_Swaroop_Subbanna.webp",
+            linkUrl: "output/slam_page_48_Swaroop_Subbanna.html",
+            title: "Swaroop Subbanna",
+          },
+          {
+            imageUrl: "output/photo_49_Vishruth_Sumukh_Avadhani.webp",
+            linkUrl: "output/slam_page_49_Vishruth_Sumukh_Avadhani.html",
+            title: "Vishruth Sumukh Avadhani",
+          },
+          {
+            imageUrl: "output/photo_50_Will_Hanschell.webp",
+            linkUrl: "output/slam_page_50_Will_Hanschell.html",
+            title: "Will Hanschell",
+          },
+          {
+            imageUrl: "output/photo_51_Meghana_and_Srikanth.webp",
+            linkUrl: "output/slam_page_51_Meghana_and_Srikanth.html",
+            title: "Meghana and Srikanth",
+          },
+          {
+            imageUrl: "output/photo_52_Rajiv_Naik.webp",
+            linkUrl: "output/slam_page_52_Rajiv_Naik.html",
+            title: "Rajiv Naik",
+          },
         ];
 
         // Progressive loading strategy
         const gridData = allHexagonsData.filter((hex) => !hex.isProminent);
         const gridContainer = document.getElementById("hive-grid-container");
-        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 3];
+        const rowLayout = [5, 6, 7, 8, 7, 6, 5, 4, 4];
         let dataIndex = 0;
 
         // Build the hive grid with lazy loading
         rowLayout.forEach((hexCount, rowIndex) => {
           const row = document.createElement("div");
           row.classList.add("hive-row");
-          
+
           for (let i = 0; i < hexCount; i++) {
             if (dataIndex >= gridData.length) break;
-            
+
             const hexagon = createHexagon(gridData[dataIndex]);
             row.appendChild(hexagon);
-            
+
             // Start observing for lazy loading
             imageObserver.observe(hexagon);
-            
+
             dataIndex++;
           }
           gridContainer.appendChild(row);
         });
 
-                 // Hide page loader after critical content is ready
-         setTimeout(() => {
-           pageLoader.classList.add('hidden');
-           
-           // Trigger rocket crackers after loader is hidden
-           setTimeout(createRocketCrackers, 500);
-         }, 200);
+        // Hide page loader after critical content is ready
+        setTimeout(() => {
+          pageLoader.classList.add("hidden");
+
+          // Trigger rocket crackers after loader is hidden
+          setTimeout(createRocketCrackers, 500);
+        }, 200);
 
         // Mobile scroll hint management
-        const scrollHint = document.querySelector('.scroll-hint');
+        const scrollHint = document.querySelector(".scroll-hint");
         if (scrollHint) {
           const hideHint = () => {
-            scrollHint.style.opacity = '0';
-            setTimeout(() => scrollHint.style.display = 'none', 300);
+            scrollHint.style.opacity = "0";
+            setTimeout(() => (scrollHint.style.display = "none"), 300);
           };
-          
+
           setTimeout(hideHint, 6000);
-          
-          const beehiveContainer = document.querySelector('.beehive-container');
+
+          const beehiveContainer = document.querySelector(".beehive-container");
           if (beehiveContainer) {
-            beehiveContainer.addEventListener('scroll', () => {
-              setTimeout(hideHint, 1000);
-            }, { once: true });
+            beehiveContainer.addEventListener(
+              "scroll",
+              () => {
+                setTimeout(hideHint, 1000);
+              },
+              { once: true }
+            );
           }
-          
-          document.addEventListener('touchstart', hideHint, { once: true });
+
+          document.addEventListener("touchstart", hideHint, { once: true });
         }
 
         // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-          if (event.key === 'Enter' || event.key === ' ') {
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
             const focused = document.activeElement;
-            if (focused.tagName === 'A' && focused.closest('.hexagon')) {
+            if (focused.tagName === "A" && focused.closest(".hexagon")) {
               event.preventDefault();
               focused.click();
             }
@@ -850,22 +1178,22 @@
         const triggerPreload = () => {
           if (preloadTriggered) return;
           preloadTriggered = true;
-          
+
           // Preload first few images for smoother scrolling
           const firstBatch = gridData.slice(0, 10);
-          firstBatch.forEach(hexData => {
+          firstBatch.forEach((hexData) => {
             const preloadImg = new Image();
             preloadImg.src = hexData.imageUrl;
           });
         };
 
         // Trigger preload on first user interaction
-        ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+        ["click", "scroll", "touchstart", "keydown"].forEach((event) => {
           document.addEventListener(event, triggerPreload, { once: true, passive: true });
         });
       });
     </script>
-    
-    <!-- Generated on 2025-07-20 21:57:36 with performance optimizations -->
+
+    <!-- Generated on 2025-07-21 08:38:25 with performance optimizations -->
   </body>
 </html>
