@@ -184,5 +184,3 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Made with ❤️ for creating beautiful memories and celebrations!**
-
--
